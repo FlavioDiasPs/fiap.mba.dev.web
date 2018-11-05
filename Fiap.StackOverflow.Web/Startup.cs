@@ -14,12 +14,15 @@ namespace Fiap.StackOverflow.Web
 
         public void Configure(IApplicationBuilder applicationBuilder, IHostingEnvironment hostingEnvironment)
         {
+            if (hostingEnvironment.IsDevelopment())
+                applicationBuilder.UseDeveloperExceptionPage();
+
             applicationBuilder.UseMvc(
                 r =>
                 {
                     r.MapRoute(
                         name: "default",
-                        template: "{controller=Home}:{action=Index}/{id?}");
+                        template: "{controller=Home}/{action=Index}/{id?}");
                 }
            );
         }
