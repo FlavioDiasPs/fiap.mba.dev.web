@@ -8,7 +8,7 @@ namespace Fiap.StackOverflow.Web
     {
         static void Main(string[] args)
         {
-            BuildWebHost(args);
+            BuildWebHost(args).Run();
         }
         public static IWebHost BuildWebHost(string[] args)
         {
