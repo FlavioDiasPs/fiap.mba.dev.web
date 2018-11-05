@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.AspNetCore;
+using Microsoft.AspNetCore.Hosting;
+using System;
 
 namespace Fiap.StackOverflow.Web
 {
@@ -6,7 +8,11 @@ namespace Fiap.StackOverflow.Web
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            BuildWebHost(args);
+        }
+        public static IWebHost BuildWebHost(string[] args)
+        {
+            return WebHost.CreateDefaultBuilder(args).UseStartup<Startup>().Build();
         }
     }
 }
