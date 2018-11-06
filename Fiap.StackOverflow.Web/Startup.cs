@@ -8,12 +8,20 @@ using Fiap.StackOverflow.Infra.Data.Transactions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Fiap.StackOverflow.Web
 {
     public class Startup
     {
+        public IConfiguration Configuration { get; }
+
+        public Startup(IConfiguration configuration)
+        {
+            Configuration = configuration;
+        }
+
         public void ConfigureServices(IServiceCollection serviceCollection)
         {
             serviceCollection.AddScoped<StackOverflowContext, StackOverflowContext>();
@@ -27,6 +35,7 @@ namespace Fiap.StackOverflow.Web
             serviceCollection.AddTransient<IAnswerRepository, AnswerRepository>();
 
             serviceCollection.AddMvc();
+
         }
 
         public void Configure(IApplicationBuilder applicationBuilder, IHostingEnvironment hostingEnvironment)
@@ -34,10 +43,10 @@ namespace Fiap.StackOverflow.Web
             if (hostingEnvironment.IsDevelopment())
                 applicationBuilder.UseDeveloperExceptionPage();
 
-            applicationBuilder.UseMvc(
-                r =>
+            applicationBuilder.UseStaticFiles();
+            applicationBuilder.UseMvc(routes =>
                 {
-                    r.MapRoute(
+                    routes.MapRoute(
                         name: "default",
                         template: "{controller=Home}/{action=Index}/{id?}");
                 }
