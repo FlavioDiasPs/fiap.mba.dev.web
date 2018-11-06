@@ -4,9 +4,9 @@ namespace Fiap.StackOverflow.Web.Models
 {
     public class UserDetail
     {
-        public int QuestionsCount { get; set; }
-        public int CommentsCount { get; set; }
-        public DateTime FirsTimeLogged { get; set; }
+        public int QuestionCount { get; set; }
+        public int CommentCount { get; set; }
+        public DateTime FirstTimeLogged { get; set; }
         public DateTime LastTimeLogged { get; set; }
     }
 }

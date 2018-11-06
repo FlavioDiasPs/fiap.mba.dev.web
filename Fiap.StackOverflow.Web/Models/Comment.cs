@@ -10,7 +10,7 @@ namespace Fiap.StackOverflow.Web.Models
         public Content Content { get; set; }
         public List<Content> ContentHistory { get; set; }
         public User User { get; set; }
-        public int FavoritesCount { get; set; }
-        public int UsefullMarksCount { get; set; }        
+        public int FavoriteCount { get; set; }
+        public int UsefullMarkCount { get; set; }        
     }
 }
