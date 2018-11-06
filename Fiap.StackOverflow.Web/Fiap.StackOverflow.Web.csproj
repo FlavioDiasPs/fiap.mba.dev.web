@@ -10,4 +10,14 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.5" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Fiap.StackOverflow.Data\Fiap.StackOverflow.Infra.Data.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="Views\Question\Index.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+  </ItemGroup>
+
 </Project>

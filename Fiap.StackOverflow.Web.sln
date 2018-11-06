@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2048
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fiap.StackOverflow.Web", "Fiap.StackOverflow.Web\Fiap.StackOverflow.Web.csproj", "{61A44A9A-10E0-47B4-A32B-B054FE0BB1F0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fiap.StackOverflow.Web", "Fiap.StackOverflow.Web\Fiap.StackOverflow.Web.csproj", "{61A44A9A-10E0-47B4-A32B-B054FE0BB1F0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fiap.StackOverflow.Infra.Data", "Fiap.StackOverflow.Data\Fiap.StackOverflow.Infra.Data.csproj", "{D48E0FD3-2509-4BE7-947D-49FDB30251C1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fiap.StackOverflow.Core", "Fiap.StackOverflow.Core\Fiap.StackOverflow.Core.csproj", "{17BA97DE-CBAB-4FDF-9CDB-9572E26B1E74}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{61A44A9A-10E0-47B4-A32B-B054FE0BB1F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{61A44A9A-10E0-47B4-A32B-B054FE0BB1F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{61A44A9A-10E0-47B4-A32B-B054FE0BB1F0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D48E0FD3-2509-4BE7-947D-49FDB30251C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D48E0FD3-2509-4BE7-947D-49FDB30251C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D48E0FD3-2509-4BE7-947D-49FDB30251C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D48E0FD3-2509-4BE7-947D-49FDB30251C1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{17BA97DE-CBAB-4FDF-9CDB-9572E26B1E74}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{17BA97DE-CBAB-4FDF-9CDB-9572E26B1E74}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{17BA97DE-CBAB-4FDF-9CDB-9572E26B1E74}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{17BA97DE-CBAB-4FDF-9CDB-9572E26B1E74}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
