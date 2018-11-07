@@ -1,4 +1,10 @@
-﻿using Fiap.StackOverflow.Web.Attributes;
+﻿
+using Fiap.StackOverflow.Core.Interfaces.Repositories;
+using Fiap.StackOverflow.Core.Interfaces.Services;
+using Fiap.StackOverflow.Core.Services;
+using Fiap.StackOverflow.Infra.Data.Context;
+using Fiap.StackOverflow.Infra.Data.Repositories;
+using Fiap.StackOverflow.Infra.Data.Transactions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -17,11 +23,19 @@ namespace Fiap.StackOverflow.Web
         }
 
         public void ConfigureServices(IServiceCollection serviceCollection)
-        {    
-            serviceCollection.AddMvc(config =>
-            {
-                config.Filters.Add(new ModelValidationFilter());
-            });
+        {
+            serviceCollection.AddScoped<StackOverflowContext, StackOverflowContext>();
+
+            serviceCollection.AddTransient<IUnitOfWork, UnitOfWork>();
+            
+            serviceCollection.AddTransient<IQuestionService, QuestionService>();
+            serviceCollection.AddTransient<IAnswerService, AnswerService>();
+
+            serviceCollection.AddTransient<IQuestionRepository, QuestionRepository>();
+            serviceCollection.AddTransient<IAnswerRepository, AnswerRepository>();
+
+            serviceCollection.AddMvc();
+
         }
 
         public void Configure(IApplicationBuilder applicationBuilder, IHostingEnvironment hostingEnvironment)
