@@ -2,18 +2,22 @@
 using Fiap.StackOverflow.Infra.Data.EntityFramework;
 using System;
 using System.Collections.Generic;
-using System.Text;
+using Microsoft.EntityFrameworkCore;
 
 namespace Fiap.StackOverflow.Infra.Data.Repositories.Base
 {
     public class RepositoryBase<TEntity> : IDisposable, IRepositoryBase<TEntity> where TEntity : class
     {
-        protected StackOverflowContext db = new StackOverflowContext();
 
+        private readonly StackOverflowContext _context;
+        public RepositoryBase(StackOverflowContext context)
+        {
+            _context = context;
+        }
         public void Add(TEntity obj)
         {
-            db.Set<TEntity>().Add(obj);
-            db.SaveChanges();
+            _context.Set<TEntity>().Add(obj);
+            _context.SaveChanges();
         }
 
         public void Dispose()
@@ -22,24 +26,24 @@ namespace Fiap.StackOverflow.Infra.Data.Repositories.Base
 
         public virtual IEnumerable<TEntity> GetAll()
         {
-            return db.Set<TEntity>();
+            return _context.Set<TEntity>();
         }
 
         public TEntity GetById(int id)
         {
-            return db.Set<TEntity>().Find(id);
+            return _context.Set<TEntity>().Find(id);
         }
 
         public void Remove(TEntity obj)
         {
-            db.Entry(obj).State = Microsoft.EntityFrameworkCore.EntityState.Deleted;
-            db.SaveChanges();
+            _context.Entry(obj).State = Microsoft.EntityFrameworkCore.EntityState.Deleted;
+            _context.SaveChanges();
         }
 
         public void Update(TEntity obj)
         {
-            db.Entry(obj).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
-            db.SaveChanges();
+            _context.Entry(obj).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            _context.SaveChanges();
         }
     }
 }

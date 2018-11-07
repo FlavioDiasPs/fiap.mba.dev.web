@@ -12,10 +12,12 @@ namespace Fiap.StackOverflow.Infra.Data.Repositories
     public class QuestionRepository : RepositoryBase<Question>, IQuestionRepository
     {
         private readonly StackOverflowContext _context;
-        public QuestionRepository(StackOverflowContext context)
+
+        public QuestionRepository(StackOverflowContext context) : base(context)
         {
             _context = context;
         }
+
         public IQueryable<Question> GetQuestions()
         {
             return _context.Questions
