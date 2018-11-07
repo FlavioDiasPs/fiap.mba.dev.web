@@ -5,10 +5,14 @@ using System.Text;
 
 namespace Fiap.StackOverflow.Web.Controllers
 {
-    
-    public class HomeController : Controller
-    {        
-        public IActionResult Index()
+    public class QuestionController : Controller
+    {
+        public QuestionController()
+        {
+
+        }
+
+        public IActionResult Question(int? questionId)
         {
             return View();
         }

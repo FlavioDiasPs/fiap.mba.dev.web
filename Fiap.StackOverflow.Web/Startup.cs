@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using Fiap.StackOverflow.Web.Attributes;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
@@ -16,9 +17,11 @@ namespace Fiap.StackOverflow.Web
         }
 
         public void ConfigureServices(IServiceCollection serviceCollection)
-        {
-            serviceCollection.AddMvc();
-
+        {    
+            serviceCollection.AddMvc(config =>
+            {
+                config.Filters.Add(new ModelValidationFilter());
+            });
         }
 
         public void Configure(IApplicationBuilder applicationBuilder, IHostingEnvironment hostingEnvironment)
