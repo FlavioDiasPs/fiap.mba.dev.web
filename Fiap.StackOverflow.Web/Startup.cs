@@ -2,7 +2,7 @@
 using Fiap.StackOverflow.Core.Interfaces.Repositories;
 using Fiap.StackOverflow.Core.Interfaces.Services;
 using Fiap.StackOverflow.Core.Services;
-using Fiap.StackOverflow.Infra.Data.Context;
+using Fiap.StackOverflow.Infra.Data.EntityFramework;
 using Fiap.StackOverflow.Infra.Data.Repositories;
 using Fiap.StackOverflow.Infra.Data.Transactions;
 using Microsoft.AspNetCore.Builder;

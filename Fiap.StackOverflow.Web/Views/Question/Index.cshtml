@@ -1,7 +1,35 @@
-﻿
-@{
-    ViewData["Title"] = "Index";
-}
+﻿@model Fiap.StackOverflow.Web.ViewModels.QuestionViewModel
+<h2>Lista</h2>
 
-<h2>Index</h2>
 
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Title
+            </th>
+            <th>
+                Description
+            </th>
+            <th>
+                Author
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Questions)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Author)
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

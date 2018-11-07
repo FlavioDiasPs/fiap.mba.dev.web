@@ -5,11 +5,38 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20181107031503_Setup.cs" />
+    <Compile Remove="Migrations\20181107033858_Setup.cs" />
+    <Compile Remove="Migrations\20181107034017_Setup.cs" />
+    <Compile Remove="Migrations\20181107034340_Setup.cs" />
+    <Compile Remove="Migrations\20181107034522_Setup.cs" />
+    <Compile Remove="Migrations\20181107034823_Setup.cs" />
+    <Compile Remove="Migrations\20181107034901_Setup.cs" />
+    <Compile Remove="Migrations\20181107041621_Setup1.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.1.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.1.4">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Fiap.StackOverflow.Core\Fiap.StackOverflow.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="System">
+      <HintPath>System</HintPath>
+    </Reference>
+    <Reference Include="System.Data">
+      <HintPath>System.Data</HintPath>
+    </Reference>
+    <Reference Include="System.Xml">
+      <HintPath>System.Xml</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>

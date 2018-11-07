@@ -18,12 +18,14 @@ namespace Fiap.StackOverflow.Web.Controllers
 
         public IActionResult Index()
         {
-            var questions = _questionService.GetAll().Select(x=> new QuestionModel() {
+
+            var questions = _questionService.GetQuestions().Select(x=> new QuestionModel() {
                 Id = x.Id,
                 Title = x.Title,
                 Description = x.Description,
                 AuthorId = x.AuthorId,
-                Tags = x.Tags
+                Author = x.Author.Name
+                //Tags = x.Tags
             }).ToList();
 
             var vm = new QuestionViewModel();

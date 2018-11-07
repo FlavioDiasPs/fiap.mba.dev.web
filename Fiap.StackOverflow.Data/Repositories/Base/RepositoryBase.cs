@@ -1,5 +1,5 @@
 ﻿using Fiap.StackOverflow.Core.Interfaces.Repositories.Base;
-using Fiap.StackOverflow.Infra.Data.Context;
+using Fiap.StackOverflow.Infra.Data.EntityFramework;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -20,7 +20,7 @@ namespace Fiap.StackOverflow.Infra.Data.Repositories.Base
         {
         }
 
-        public IEnumerable<TEntity> GetAll()
+        public virtual IEnumerable<TEntity> GetAll()
         {
             return db.Set<TEntity>();
         }

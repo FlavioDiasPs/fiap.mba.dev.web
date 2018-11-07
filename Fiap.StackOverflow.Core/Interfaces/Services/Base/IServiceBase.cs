@@ -5,7 +5,7 @@ using System.Text;
 namespace Fiap.StackOverflow.Core.Interfaces.Services.Base
 {
 
-    public interface IServiceBase<TEntity> : IDisposable where TEntity : class 
+    public interface IServiceBase<TEntity>  where TEntity : class 
     {
         void Add(TEntity obj);
         TEntity GetById(int id);

@@ -7,6 +7,10 @@ namespace Fiap.StackOverflow.Core.Entities
 {
     public class Answer : EntityBase
     {
+        protected Answer()
+        {
+
+        }
         public int Votes { get; set; }
         public User Author { get; set; }
         public int AuthorId { get; set; }

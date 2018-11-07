@@ -19,12 +19,7 @@ namespace Fiap.StackOverflow.Core.Services
         {
             throw new NotImplementedException();
         }
-
-        public void Dispose()
-        {
-            throw new NotImplementedException();
-        }
-
+        
         public IEnumerable<Question> GetAll()
         {
             return _repository.GetAll();
@@ -33,6 +28,11 @@ namespace Fiap.StackOverflow.Core.Services
         public Question GetById(int id)
         {
             throw new NotImplementedException();
+        }
+
+        public IEnumerable<Question> GetQuestions()
+        {
+            return _repository.GetQuestions();
         }
 
         public void Remove(Question obj)

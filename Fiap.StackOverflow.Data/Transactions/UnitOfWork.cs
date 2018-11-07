@@ -1,4 +1,4 @@
-﻿using Fiap.StackOverflow.Infra.Data.Context;
+﻿using Fiap.StackOverflow.Infra.Data.EntityFramework;
 using System;
 using System.Collections.Generic;
 using System.Text;
