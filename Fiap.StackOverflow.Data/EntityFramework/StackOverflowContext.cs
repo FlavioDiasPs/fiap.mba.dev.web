@@ -34,5 +34,10 @@ namespace Fiap.StackOverflow.Infra.Data.EntityFramework
             base.OnModelCreating(modelBuilder);
         }
 
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    optionsBuilder.UseSqlServer("Data Source=sqlserver01.mkth.hospedagemdesites.ws;Initial Catalog=mkth23;User ID=mkth23;Password=F14p#MBA*net1B");
+        //}
+
     }
 }
