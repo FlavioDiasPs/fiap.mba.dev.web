@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Fiap.StackOverflow.Web.Models
+namespace Fiap.StackOverflow.Core.Entities
 {
     public class UserDetail
     {
