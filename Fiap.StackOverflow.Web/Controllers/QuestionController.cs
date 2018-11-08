@@ -1,4 +1,5 @@
-﻿using Fiap.StackOverflow.Core.Entities;
+﻿using AutoMapper;
+using Fiap.StackOverflow.Core.Entities;
 using Fiap.StackOverflow.Core.Interfaces.Services;
 using Fiap.StackOverflow.Infra.Data.Transactions;
 using Fiap.StackOverflow.Web.Models;
@@ -16,12 +17,14 @@ namespace Fiap.StackOverflow.Web.Controllers
         private readonly IQuestionService _questionService;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IUserService _userService;
+        private readonly IMapper _mapper;
 
-        public QuestionController(IUnitOfWork unitOfWork, IQuestionService questionService, IUserService userService) : base(unitOfWork)
+        public QuestionController(IMapper mapper, IUnitOfWork unitOfWork, IQuestionService questionService, IUserService userService) : base(unitOfWork)
         {
             _questionService = questionService;
             _unitOfWork = unitOfWork;
             _userService = userService;
+            _mapper = mapper;
         }
         public ActionResult Index()
         {
@@ -45,14 +48,7 @@ namespace Fiap.StackOverflow.Web.Controllers
         {
             var question = _questionService.GetCompleteById(id);
 
-            return View(new QuestionModel()
-            {
-                Author = question.Author.Name,
-                AuthorId = question.AuthorId,
-                Description = question.Description,
-                Title = question.Title,
-                Id = question.Id
-            });
+            return View(_mapper.Map<QuestionModel>(question));
         }
 
         public ActionResult Create()
@@ -129,7 +125,6 @@ namespace Fiap.StackOverflow.Web.Controllers
 
                     _questionService.Update(question);
 
-                    _unitOfWork.SaveChanges();
                     _unitOfWork.Commit();
 
                     return RedirectToAction(nameof(Index));
@@ -159,7 +154,6 @@ namespace Fiap.StackOverflow.Web.Controllers
                 _unitOfWork.BeginTransactionAnsyc();
                 _questionService.Remove(question);
 
-                _unitOfWork.SaveChanges();
                 _unitOfWork.Commit();
                 return RedirectToAction(nameof(Index));
             }

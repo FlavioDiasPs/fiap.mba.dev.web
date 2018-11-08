@@ -1,10 +1,14 @@
 ﻿
+using AutoMapper;
+using Fiap.StackOverflow.Core.Entities;
 using Fiap.StackOverflow.Core.Interfaces.Repositories;
 using Fiap.StackOverflow.Core.Interfaces.Services;
 using Fiap.StackOverflow.Core.Services;
 using Fiap.StackOverflow.Infra.Data.EntityFramework;
 using Fiap.StackOverflow.Infra.Data.Repositories;
 using Fiap.StackOverflow.Infra.Data.Transactions;
+using Fiap.StackOverflow.Web.Mapping;
+using Fiap.StackOverflow.Web.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -26,6 +30,7 @@ namespace Fiap.StackOverflow.Web
 
         public void ConfigureServices(IServiceCollection serviceCollection)
         {
+            serviceCollection.AddAutoMapper();
 
             serviceCollection.AddDbContext<StackOverflowContext>(options => options.UseSqlServer(ConnectionString));
 

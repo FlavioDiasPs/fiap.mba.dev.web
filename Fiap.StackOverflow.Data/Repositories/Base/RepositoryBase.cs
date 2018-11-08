@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace Fiap.StackOverflow.Infra.Data.Repositories.Base
 {
-    public class RepositoryBase<TEntity> : IDisposable, IRepositoryBase<TEntity> where TEntity : class
+    public class RepositoryBase<TEntity>: IRepositoryBase<TEntity> where TEntity : class
     {
 
         private readonly StackOverflowContext _context;
