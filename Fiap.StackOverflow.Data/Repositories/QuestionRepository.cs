@@ -2,10 +2,8 @@
 using Fiap.StackOverflow.Core.Interfaces.Repositories;
 using Fiap.StackOverflow.Infra.Data.EntityFramework;
 using Fiap.StackOverflow.Infra.Data.Repositories.Base;
-using System.Collections.Generic;
-using System.Linq;
-using System;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace Fiap.StackOverflow.Infra.Data.Repositories
 {
@@ -17,7 +15,12 @@ namespace Fiap.StackOverflow.Infra.Data.Repositories
         {
             _context = context;
         }
-
+        public Question GetCompleteById(int id)
+        {
+            return _context.Questions
+                .Include(x => x.Author)
+                .FirstOrDefault(x => x.Id == id);
+        }
         public IQueryable<Question> GetQuestions()
         {
             return _context.Questions

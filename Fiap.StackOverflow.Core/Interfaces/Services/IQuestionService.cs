@@ -9,5 +9,6 @@ namespace Fiap.StackOverflow.Core.Interfaces.Services
     public interface IQuestionService : IServiceBase<Question>
     {
         IEnumerable<Question> GetQuestions();
+        Question GetCompleteById(int id);
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Fiap.StackOverflow.Core.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -19,5 +20,17 @@ namespace Fiap.StackOverflow.Web.Models
         public List<string> Tags { get; set; }
 
         //public List<AnswerModel> Answers { get; set; }
+
+        public static explicit operator QuestionModel(Question question)
+        {
+            return new QuestionModel()
+            {
+                Author = question.Author.Name,
+                AuthorId = question.AuthorId,
+                Description = question.Description,
+                Id = question.Id,
+                Title = question.Title
+            };
+        }
     }
 }

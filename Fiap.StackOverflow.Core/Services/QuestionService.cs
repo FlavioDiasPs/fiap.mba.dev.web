@@ -3,7 +3,6 @@ using Fiap.StackOverflow.Core.Interfaces.Repositories;
 using Fiap.StackOverflow.Core.Interfaces.Services;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Fiap.StackOverflow.Core.Services
 {
@@ -27,9 +26,14 @@ namespace Fiap.StackOverflow.Core.Services
 
         public Question GetById(int id)
         {
-            throw new NotImplementedException();
+            return _repository.GetById(id);
         }
 
+        public Question GetCompleteById(int id)
+        {
+            return _repository.GetCompleteById(id);
+            throw new NotImplementedException();
+        }
         public IEnumerable<Question> GetQuestions()
         {
             return _repository.GetQuestions();

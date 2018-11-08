@@ -3,6 +3,7 @@ using Fiap.StackOverflow.Infra.Data.EntityFramework;
 using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace Fiap.StackOverflow.Infra.Data.Repositories.Base
 {
@@ -32,6 +33,10 @@ namespace Fiap.StackOverflow.Infra.Data.Repositories.Base
         public TEntity GetById(int id)
         {
             return _context.Set<TEntity>().Find(id);
+        }
+        public IQueryable<TEntity> Get()
+        {
+            return _context.Set<TEntity>().AsQueryable();
         }
 
         public void Remove(TEntity obj)
