@@ -9,10 +9,16 @@ namespace Fiap.StackOverflow.Core.Entities
         {
 
         }
-        //public Question()
-        //{
-        //    Tags = new List<string>();
-        //}
+        public Question(int authorId, string title, string description)
+        {
+            AuthorId = authorId;
+            Title = title;
+            Description = description;
+            Answers = new List<Answer>();
+            ViewCount = 0;
+            //Tags = new List<string>();
+        }
+
         public User Author { get; set; }
         public int AuthorId { get; set; }
         public string Title { get; set; }

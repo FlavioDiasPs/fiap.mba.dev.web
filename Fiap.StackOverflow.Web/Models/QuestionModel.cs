@@ -1,6 +1,8 @@
 ﻿using Fiap.StackOverflow.Core.Entities;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -8,16 +10,27 @@ namespace Fiap.StackOverflow.Web.Models
 {
     public class QuestionModel
     {
+        public QuestionModel()
+        {
+            Tags = new List<string>();
+            Authors = new List<SelectListItem>();
+        }
+
         public int Id { get; set; }
         //public UserModel Author { get; set; }
         public string Author { get; set; }
+
+        [Required(ErrorMessage = "Preencher campo AuthorId")]
         public int AuthorId { get; set; }
 
+        [Required(ErrorMessage = "Preencher campo Title"), MaxLength(100)]
         public string Title { get; set; }
 
+        [Required(ErrorMessage = "Preencher campo Description"), MaxLength(256)]
         public string Description { get; set; }
 
         public List<string> Tags { get; set; }
+        public List<SelectListItem> Authors { get; set; }
 
         //public List<AnswerModel> Answers { get; set; }
 

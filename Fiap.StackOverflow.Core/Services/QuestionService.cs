@@ -16,7 +16,7 @@ namespace Fiap.StackOverflow.Core.Services
         }
         public void Add(Question obj)
         {
-            throw new NotImplementedException();
+            _repository.Add(obj);
         }
         
         public IEnumerable<Question> GetAll()
@@ -41,7 +41,7 @@ namespace Fiap.StackOverflow.Core.Services
 
         public void Remove(Question obj)
         {
-            throw new NotImplementedException();
+            _repository.Remove(obj);
         }
 
         public void Update(Question obj)

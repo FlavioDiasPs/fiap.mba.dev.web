@@ -41,13 +41,13 @@ namespace Fiap.StackOverflow.Infra.Data.Repositories.Base
 
         public void Remove(TEntity obj)
         {
-            _context.Entry(obj).State = Microsoft.EntityFrameworkCore.EntityState.Deleted;
+            _context.Entry(obj).State = EntityState.Deleted;
             _context.SaveChanges();
         }
 
         public void Update(TEntity obj)
         {
-            _context.Entry(obj).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            _context.Entry(obj).State = EntityState.Modified;
             _context.SaveChanges();
         }
     }

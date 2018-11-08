@@ -32,8 +32,10 @@ namespace Fiap.StackOverflow.Web
             serviceCollection.AddTransient<IUnitOfWork, UnitOfWork>();
 
             serviceCollection.AddTransient<IQuestionService, QuestionService>();
+            serviceCollection.AddTransient<IUserService, UserService>();
             serviceCollection.AddTransient<IAnswerService, AnswerService>();
 
+            serviceCollection.AddTransient<IUserRepository, UserRepository>();
             serviceCollection.AddTransient<IQuestionRepository, QuestionRepository>();
             serviceCollection.AddTransient<IAnswerRepository, AnswerRepository>();
 

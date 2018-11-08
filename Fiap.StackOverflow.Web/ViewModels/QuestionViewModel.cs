@@ -8,6 +8,7 @@ namespace Fiap.StackOverflow.Web.ViewModels
 {
     public class QuestionViewModel
     {
+        public QuestionModel Question { get; set; }
         public List<QuestionModel> Questions { get; set; }
     }
 }

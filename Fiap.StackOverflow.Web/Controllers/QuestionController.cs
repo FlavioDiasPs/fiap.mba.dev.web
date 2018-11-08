@@ -1,9 +1,12 @@
-﻿using Fiap.StackOverflow.Core.Interfaces.Services;
+﻿using Fiap.StackOverflow.Core.Entities;
+using Fiap.StackOverflow.Core.Interfaces.Services;
 using Fiap.StackOverflow.Infra.Data.Transactions;
 using Fiap.StackOverflow.Web.Models;
 using Fiap.StackOverflow.Web.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
 using System.Linq;
 
 namespace Fiap.StackOverflow.Web.Controllers
@@ -12,11 +15,13 @@ namespace Fiap.StackOverflow.Web.Controllers
     {
         private readonly IQuestionService _questionService;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IUserService _userService;
 
-        public QuestionController(IUnitOfWork unitOfWork, IQuestionService questionService) : base(unitOfWork)
+        public QuestionController(IUnitOfWork unitOfWork, IQuestionService questionService, IUserService userService) : base(unitOfWork)
         {
             _questionService = questionService;
             _unitOfWork = unitOfWork;
+            _userService = userService;
         }
         public ActionResult Index()
         {
@@ -29,14 +34,13 @@ namespace Fiap.StackOverflow.Web.Controllers
                 Author = x.Author.Name
                 //Tags = x.Tags
             }).ToList();
-            
+
             var vm = new QuestionViewModel();
             vm.Questions = questions;
 
             return View(vm);
         }
 
-        // GET: Question/Details/5
         public ActionResult Details(int id)
         {
             var question = _questionService.GetCompleteById(id);
@@ -51,29 +55,56 @@ namespace Fiap.StackOverflow.Web.Controllers
             });
         }
 
-        // GET: Question/Create
         public ActionResult Create()
         {
-            return View();
+            var m = new QuestionModel();
+            LoadCreate(m);
+
+            return View(m);
         }
 
-        // POST: Question/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create([Bind("AuthorId,Title,Description")] QuestionModel questionModel)
         {
-            try
-            {
-                // TODO: Add insert logic here
+            var m = new QuestionModel();
+            LoadCreate(m);
 
-                return RedirectToAction(nameof(Index));
-            }
-            catch
+            if (ModelState.IsValid)
             {
-                return View();
+                try
+                {
+                    var question = new Question(questionModel.AuthorId, questionModel.Title, questionModel.Description);
+
+                    _unitOfWork.BeginTransactionAnsyc();
+
+                    _questionService.Add(question);
+
+                    _unitOfWork.SaveChanges();
+                    _unitOfWork.Commit();
+
+                    return RedirectToAction(nameof(Index));
+                }
+                catch (Exception e)
+                {
+                    _unitOfWork.RollbackTransaction();
+                    return View(m);
+                }
+            }
+            else
+            {
+                return View(m);
             }
         }
-
+        private QuestionModel LoadCreate(QuestionModel questionModel)
+        {
+            questionModel.Authors = _userService.GetAll().Select(x => new SelectListItem()
+             {
+                 Value = x.Id.ToString(),
+                 Text = x.Name
+             }).ToList();
+            return questionModel;
+        }
         public ActionResult Edit(int id)
         {
             var model = (QuestionModel)_questionService.GetCompleteById(id);
@@ -84,47 +115,57 @@ namespace Fiap.StackOverflow.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, [Bind("Id,Title,Description")] QuestionModel questionModel)
         {
-            
+
             if (ModelState.IsValid)
             {
                 var question = _questionService.GetById(id);
 
                 try
                 {
+                    _unitOfWork.BeginTransactionAnsyc();
+
                     question.Title = questionModel.Title;
                     question.Description = questionModel.Description;
 
+                    _questionService.Update(question);
+
+                    _unitOfWork.SaveChanges();
                     _unitOfWork.Commit();
 
                     return RedirectToAction(nameof(Index));
                 }
                 catch
                 {
+                    _unitOfWork.RollbackTransaction();
                     return View();
                 }
             }
             return View();
         }
 
-        // GET: Question/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            var question = (QuestionModel)_questionService.GetCompleteById(id);
+            return View(question);
         }
 
-        // POST: Question/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, IFormCollection collection)
         {
+            var question = _questionService.GetById(id);
             try
             {
-                // TODO: Add delete logic here
+                _unitOfWork.BeginTransactionAnsyc();
+                _questionService.Remove(question);
 
+                _unitOfWork.SaveChanges();
+                _unitOfWork.Commit();
                 return RedirectToAction(nameof(Index));
             }
             catch
             {
+                _unitOfWork.RollbackTransaction();
                 return View();
             }
         }
