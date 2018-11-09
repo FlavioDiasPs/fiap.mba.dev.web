@@ -1,5 +1,6 @@
 ﻿using Fiap.StackOverflow.Core.Entities;
 using Fiap.StackOverflow.Infra.Data.EntityFramework.Map;
+using Fiap.StackOverflow.Infra.Data.IdentityExtension;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -8,7 +9,7 @@ using System.Linq;
 
 namespace Fiap.StackOverflow.Infra.Data.EntityFramework
 {
-    public class StackOverflowContext : IdentityDbContext
+    public class StackOverflowContext : IdentityDbContext<ApplicationUser, ApplicationRole, string>
     {
         public StackOverflowContext(DbContextOptions<StackOverflowContext> options) : base(options)
         {
@@ -28,7 +29,8 @@ namespace Fiap.StackOverflow.Infra.Data.EntityFramework
                     {
                         property.AsProperty().Builder
                             .HasMaxLength(256, ConfigurationSource.Convention);
-                        property.AsProperty().Builder.IsUnicode(true, ConfigurationSource.Convention);
+                        property.AsProperty().Builder
+                            .IsUnicode(false, ConfigurationSource.Convention);
                     }
 
             base.OnModelCreating(modelBuilder);

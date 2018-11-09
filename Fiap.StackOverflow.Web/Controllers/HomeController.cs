@@ -10,6 +10,8 @@ namespace Fiap.StackOverflow.Web.Controllers
     {        
         public IActionResult Index()
         {
+            var teste = User;
+
             return View();
         }
     }

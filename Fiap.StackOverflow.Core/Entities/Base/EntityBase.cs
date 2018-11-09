@@ -6,5 +6,6 @@ namespace Fiap.StackOverflow.Core.Entities.Base
     {
         [Key, Required]
         public int Id { get; private set; }
+
     }
 }
