@@ -1,7 +1,7 @@
 ﻿@model Fiap.StackOverflow.Web.ViewModels.QuestionViewModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "DoggyOverThrone";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -14,16 +14,7 @@
     <thead>
         <tr>
             <th>
-                Title
-            </th>
-            <th>
-                Description
-            </th>
-            <th>
-                Author
-            </th>
-            <th>
-
+                Questions
             </th>
         </tr>
     </thead>
@@ -32,18 +23,32 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Title)
+                    @Html.ActionLink(item.Title, "Details", new { id = item.Id })
+                    <dl>
+                        <dt style="font-size:11px">
+                            @foreach (var tag in item.Tags)
+                            {
+                                var text = tag + " ";
+                                @Html.DisplayFor(tagItem => text)
+                            }
+                        </dt>
+                        <dd>
+                            By: @Html.DisplayFor(modelItem => item.Author)
+                        </dd>
+                    </dl>
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Description)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Author)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                    <dl>
+                        <dd style="font-size:11px">
+                            18 Repostas
+                        </dd>
+                        <dd style="font-size:11px">
+                            4 Votos
+                        </dd>
+                        <dd style="font-size:11px">
+                            alguma outra coisa
+                        </dd>
+                    </dl>
                 </td>
             </tr>
         }

@@ -1,22 +1,21 @@
 ﻿@model Fiap.StackOverflow.Web.Models.QuestionModel
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Creating your question.";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Create</h2>
+<h2>Build your question</h2>
 
-<h4>QuestionModel</h4>
 <hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-4">        
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="AuthorId" class="control-label"></label>
-                <select asp-for="AuthorId" class="form-control" asp-items="Model.Authors"></select>
-                <span asp-validation-for="AuthorId" class="text-danger"></span>
+                <label asp-for="Author" class="control-label"></label>
+                <select asp-for="Author" class="form-control" asp-items="Model.Authors"></select>
+                <span asp-validation-for="Author" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Title" class="control-label"></label>
@@ -25,8 +24,13 @@
             </div>
             <div class="form-group">
                 <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" />
+                <textarea asp-for="Description" rows="5" cols="40"></textarea>
                 <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Tags" class="control-label"></label>
+                <input asp-for="Author" class="form-control" asp-items="Model.Tags"/>
+                <span asp-validation-for="Tags" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-default" />
@@ -38,4 +42,10 @@
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
+
+<script>
+    $("#tagInput").keyup(function () {
+        $("#tagInput").val($("#tagInput").val().replace(" ", ""));
+    });
+</script>
 

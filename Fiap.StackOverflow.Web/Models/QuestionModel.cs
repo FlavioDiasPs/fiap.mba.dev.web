@@ -12,8 +12,14 @@ namespace Fiap.StackOverflow.Web.Models
     {
         public QuestionModel()
         {
-            Tags = new List<string>();
+            Tags = new List<string>() { "C#", "JAVA", "RenatoGay"};
             Authors = new List<SelectListItem>();
+            Vote = 10;
+            Answers = new List<AnswerModel>()
+            {
+                new AnswerModel(1, "Description lala", 1),
+                new AnswerModel(2, "teu cu haha", 2)
+            };
         }
 
         public int Id { get; set; }
@@ -31,8 +37,9 @@ namespace Fiap.StackOverflow.Web.Models
 
         public List<string> Tags { get; set; }
         public List<SelectListItem> Authors { get; set; }
+        public int Vote { get; set; }
 
-        //public List<AnswerModel> Answers { get; set; }
+        public List<AnswerModel> Answers { get; set; }
 
         public static explicit operator QuestionModel(Question question)
         {

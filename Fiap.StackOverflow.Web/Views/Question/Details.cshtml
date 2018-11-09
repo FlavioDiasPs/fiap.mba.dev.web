@@ -8,42 +8,38 @@
 <h2>Details</h2>
 
 <div>
-    <h4>QuestionModel</h4>
+    <h4>@Html.DisplayFor(model => model.Title)</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Id)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Id)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Author)
+            <button asp-action="" value="Vote" onclick="onAddVote()" runat="server">Vote</button>
+            @Html.DisplayFor(model => model.Vote)
         </dt>
         <dd>
             @Html.DisplayFor(model => model.Author)
         </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.AuthorId)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.AuthorId)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Title)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
         <dd>
             @Html.DisplayFor(model => model.Description)
         </dd>
     </dl>
 </div>
+
+<div>
+    <h4>Answers</h4>
+    <dl class="dl-horizontal">
+        <dt>
+            @foreach (var item in Model.Answers)
+            {
+
+                @Html.DisplayFor(model => item.Description)
+
+            }
+        </dt>
+    </dl>
+
+</div>
+
 <div>
     @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    <a asp-action="Index">Back to List</a>
 </div>
+
