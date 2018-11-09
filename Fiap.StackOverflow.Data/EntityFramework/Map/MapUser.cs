@@ -19,7 +19,7 @@ namespace Fiap.StackOverflow.Infra.Data.EntityFramework.Map
                 .WithOne(x => x.Author)
                 .HasForeignKey(x => x.AuthorId)
                 .OnDelete(DeleteBehavior.Restrict);
-            //builder.Property(x => x.UrlLogo).HasMaxLength(255).IsRequired();
+            
 
 
         }
