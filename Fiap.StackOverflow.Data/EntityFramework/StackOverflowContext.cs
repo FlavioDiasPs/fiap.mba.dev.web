@@ -1,12 +1,14 @@
 ﻿using Fiap.StackOverflow.Core.Entities;
 using Fiap.StackOverflow.Infra.Data.EntityFramework.Map;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.Linq;
 
 namespace Fiap.StackOverflow.Infra.Data.EntityFramework
 {
-    public class StackOverflowContext : DbContext
+    public class StackOverflowContext : IdentityDbContext
     {
         public StackOverflowContext(DbContextOptions<StackOverflowContext> options) : base(options)
         {
@@ -17,8 +19,6 @@ namespace Fiap.StackOverflow.Infra.Data.EntityFramework
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);
-
             //aplicar configurações
             modelBuilder.ApplyConfiguration(new MapQuestion());
             modelBuilder.ApplyConfiguration(new MapAnswser());
@@ -33,6 +33,8 @@ namespace Fiap.StackOverflow.Infra.Data.EntityFramework
 
             base.OnModelCreating(modelBuilder);
         }
+        
+
 
         //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         //{

@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
-using System;
 
 namespace Fiap.StackOverflow.Web
 {
@@ -8,11 +7,11 @@ namespace Fiap.StackOverflow.Web
     {
         static void Main(string[] args)
         {
-            BuildWebHost(args).Run();
+            CreateWebHostBuilder(args).Build().Run();
         }
-        public static IWebHost BuildWebHost(string[] args)
+        public static IWebHostBuilder CreateWebHostBuilder(string[] args)
         {
-            return WebHost.CreateDefaultBuilder(args).UseStartup<Startup>().Build();
+            return WebHost.CreateDefaultBuilder(args).UseStartup<Startup>();
         }
     }
 }

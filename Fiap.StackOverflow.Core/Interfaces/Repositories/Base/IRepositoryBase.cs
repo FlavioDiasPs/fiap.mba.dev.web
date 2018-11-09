@@ -10,9 +10,8 @@ namespace Fiap.StackOverflow.Core.Interfaces.Repositories.Base
         void Add(TEntity obj);
         TEntity GetById(int id);
         IEnumerable<TEntity> GetAll();
-        IQueryable<TEntity> Get();
+        IQueryable<TEntity> Queryable();
         void Update(TEntity obj);
         void Remove(TEntity obj);
-        void Dispose();
     }
 }

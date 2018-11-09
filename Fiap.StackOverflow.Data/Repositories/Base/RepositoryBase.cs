@@ -21,10 +21,6 @@ namespace Fiap.StackOverflow.Infra.Data.Repositories.Base
             _context.SaveChanges();
         }
 
-        public void Dispose()
-        {
-        }
-
         public virtual IEnumerable<TEntity> GetAll()
         {
             return _context.Set<TEntity>();
@@ -34,7 +30,7 @@ namespace Fiap.StackOverflow.Infra.Data.Repositories.Base
         {
             return _context.Set<TEntity>().Find(id);
         }
-        public IQueryable<TEntity> Get()
+        public IQueryable<TEntity> Queryable()
         {
             return _context.Set<TEntity>().AsQueryable();
         }

@@ -16,17 +16,21 @@ namespace Fiap.StackOverflow.Infra.Data.EntityFramework.Map
             //Foreign-key
             builder.HasOne(x => x.Author).WithMany(x => x.Questions).HasForeignKey("AuthorId");
 
+            builder.Property(x => x.Title)
+                .HasMaxLength(128)
+                .IsRequired();
+
+            builder.Property(x => x.Description)
+                .HasMaxLength(256)
+                .IsRequired();
+
             builder.HasKey(x => x.Id);
 
             builder.HasMany(g => g.Answers)
                 .WithOne(s => s.Question)
                 .HasForeignKey(s => s.QuestionId)
                 .OnDelete(DeleteBehavior.Restrict);
-
-            //builder.Property(x => x.Nome).HasMaxLength(50).IsRequired();
-            //builder.Property(x => x.UrlLogo).HasMaxLength(255).IsRequired();
-
-
+                       
         }
     }
 }

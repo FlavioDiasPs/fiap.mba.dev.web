@@ -4,6 +4,7 @@ using Fiap.StackOverflow.Core.Interfaces.Services;
 using Fiap.StackOverflow.Infra.Data.Transactions;
 using Fiap.StackOverflow.Web.Models;
 using Fiap.StackOverflow.Web.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -38,8 +39,7 @@ namespace Fiap.StackOverflow.Web.Controllers
                 //Tags = x.Tags
             }).ToList();
 
-            var vm = new QuestionViewModel();
-            vm.Questions = questions;
+            var vm = new QuestionViewModel{ Questions = questions };
 
             return View(vm);
         }
@@ -51,6 +51,7 @@ namespace Fiap.StackOverflow.Web.Controllers
             return View(_mapper.Map<QuestionModel>(question));
         }
 
+        //[Authorize]
         public ActionResult Create()
         {
             var m = new QuestionModel();

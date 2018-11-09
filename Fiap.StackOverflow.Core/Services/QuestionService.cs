@@ -32,7 +32,6 @@ namespace Fiap.StackOverflow.Core.Services
         public Question GetCompleteById(int id)
         {
             return _repository.GetCompleteById(id);
-            throw new NotImplementedException();
         }
         public IEnumerable<Question> GetQuestions()
         {
@@ -46,7 +45,7 @@ namespace Fiap.StackOverflow.Core.Services
 
         public void Update(Question obj)
         {
-            throw new NotImplementedException();
+            _repository.Update(obj);
         }
     }
 }
