@@ -1,9 +1,11 @@
 ﻿using Fiap.StackOverflow.Core.Entities;
 using Fiap.StackOverflow.Core.Interfaces.Repositories.Base;
+using System;
 
 namespace Fiap.StackOverflow.Core.Interfaces.Repositories
 {
-    public interface IUserRepository : IRepositoryBase<User>
+    public interface IAuthorRepository : IRepositoryBase<Author>
     {
+        Author GetByIdentityId(string id);
     }
 }

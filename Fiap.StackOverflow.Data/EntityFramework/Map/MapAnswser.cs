@@ -11,7 +11,7 @@ namespace Fiap.StackOverflow.Infra.Data.EntityFramework.Map
             //Tabela
             builder.ToTable("Answer");
             //Foreign-key
-            builder.HasOne(x => x.Author).WithMany().HasForeignKey("AuthorId");
+            builder.HasOne(x => x.Author).WithMany(x => x.Answers).HasForeignKey("AuthorId");
             //builder.HasOne(x => x.Question).WithMany().HasForeignKey("QuestionId");
 
             builder.HasKey(x => x.Id);

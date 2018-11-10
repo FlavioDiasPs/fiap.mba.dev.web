@@ -4,14 +4,16 @@ using Fiap.StackOverflow.Infra.Data.EntityFramework;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Fiap.StackOverflow.Infra.Data.Migrations
 {
     [DbContext(typeof(StackOverflowContext))]
-    partial class StackOverflowContextModelSnapshot : ModelSnapshot
+    [Migration("20181110034616_setup")]
+    partial class setup
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -52,9 +54,7 @@ namespace Fiap.StackOverflow.Infra.Data.Migrations
 
                     b.Property<int>("CommentCount");
 
-                    b.Property<string>("IdentityId")
-                        .HasMaxLength(256)
-                        .IsUnicode(false);
+                    b.Property<Guid>("IdentityId");
 
                     b.Property<string>("Name")
                         .HasMaxLength(256)

@@ -10,6 +10,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Linq;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Fiap.StackOverflow.Infra.Data.IdentityExtension;
+using System.Security.Claims;
+
 
 namespace Fiap.StackOverflow.Web.Controllers
 {
@@ -17,14 +22,14 @@ namespace Fiap.StackOverflow.Web.Controllers
     {
         private readonly IQuestionService _questionService;
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IUserService _userService;
+        private readonly IAuthorService _authorService;
         private readonly IMapper _mapper;
 
-        public QuestionController(IMapper mapper, IUnitOfWork unitOfWork, IQuestionService questionService, IUserService userService) : base(unitOfWork)
+        public QuestionController(IMapper mapper, IUnitOfWork unitOfWork, IQuestionService questionService, IAuthorService authorService) : base(unitOfWork)
         {
             _questionService = questionService;
             _unitOfWork = unitOfWork;
-            _userService = userService;
+            _authorService = authorService;
             _mapper = mapper;
         }
         public ActionResult Index()
@@ -35,7 +40,7 @@ namespace Fiap.StackOverflow.Web.Controllers
                 Title = x.Title,
                 Description = x.Description,
                 AuthorId = x.AuthorId,
-                Author = x.Author.Name
+                //Author = x.Author.Name
                 //Tags = x.Tags
             }).ToList();
 
@@ -50,13 +55,27 @@ namespace Fiap.StackOverflow.Web.Controllers
 
             return View(_mapper.Map<QuestionModel>(question));
         }
-
         //[Authorize]
         public ActionResult Create()
         {
             var m = new QuestionModel();
             LoadCreate(m);
 
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var author = _authorService.GetByIdentityId(userId);
+            if(author == null)
+            {
+                author = new Author(User.Identity.Name ,userId);
+                try
+                {
+                    _authorService.Add(author);
+                }
+                catch (Exception e)
+                {
+                    throw;
+                }
+            }
+            m.AuthorId = author.Id;
             return View(m);
         }
 
@@ -95,10 +114,10 @@ namespace Fiap.StackOverflow.Web.Controllers
         }
         private QuestionModel LoadCreate(QuestionModel questionModel)
         {
-            questionModel.Authors = _userService.GetAll().Select(x => new SelectListItem()
+            questionModel.Authors = _authorService.GetAll().Select(x => new SelectListItem()
              {
                  Value = x.Id.ToString(),
-                 Text = x.Name
+                 Text = x.Name.ToString()
              }).ToList();
             return questionModel;
         }

@@ -13,6 +13,8 @@
     <Compile Remove="Migrations\20181107034823_Setup.cs" />
     <Compile Remove="Migrations\20181107034901_Setup.cs" />
     <Compile Remove="Migrations\20181107041621_Setup1.cs" />
+    <Compile Remove="Migrations\20181107041753_Setup.cs" />
+    <Compile Remove="Migrations\20181110011051_setup.cs" />
   </ItemGroup>
 
   <ItemGroup>

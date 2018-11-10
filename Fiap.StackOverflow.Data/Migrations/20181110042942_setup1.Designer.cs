@@ -4,14 +4,16 @@ using Fiap.StackOverflow.Infra.Data.EntityFramework;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Fiap.StackOverflow.Infra.Data.Migrations
 {
     [DbContext(typeof(StackOverflowContext))]
-    partial class StackOverflowContextModelSnapshot : ModelSnapshot
+    [Migration("20181110042942_setup1")]
+    partial class setup1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -7,36 +7,41 @@ using System.Collections.Generic;
 
 namespace Fiap.StackOverflow.Core.Services
 {
-    public class UserService : IUserService
+    public class AuthorService : IAuthorService
     {
-        private readonly IUserRepository _repository;
+        private readonly IAuthorRepository _repository;
 
-        public UserService(IUserRepository repository)
+        public AuthorService(IAuthorRepository repository)
         {
             _repository = repository;
         }
 
-        public void Add(User obj)
+        public void Add(Author obj)
         {
-            throw new NotImplementedException();
+            _repository.Add(obj);
         }
 
-        public IEnumerable<User> GetAll()
+        public IEnumerable<Author> GetAll()
         {
             return _repository.GetAll();
         }
 
-        public User GetById(int id)
+        public Author GetById(int id)
         {
             return _repository.GetById(id);
         }
 
-        public void Remove(User obj)
+        public Author GetByIdentityId(string id)
+        {
+            return _repository.GetByIdentityId(id);
+        }
+
+        public void Remove(Author obj)
         {
             throw new NotImplementedException();
         }
 
-        public void Update(User obj)
+        public void Update(Author obj)
         {
             throw new NotImplementedException();
         }
