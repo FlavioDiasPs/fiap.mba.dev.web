@@ -67,6 +67,25 @@ namespace Fiap.StackOverflow.Infra.Data.Migrations
                     b.ToTable("Author");
                 });
 
+            modelBuilder.Entity("Fiap.StackOverflow.Core.Entities.Category", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(256)
+                        .IsUnicode(false);
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(256)
+                        .IsUnicode(false);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Category");
+                });
+
             modelBuilder.Entity("Fiap.StackOverflow.Core.Entities.Question", b =>
                 {
                     b.Property<int>("Id")
@@ -74,6 +93,8 @@ namespace Fiap.StackOverflow.Infra.Data.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("AuthorId");
+
+                    b.Property<int>("CategoryId");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -90,6 +111,8 @@ namespace Fiap.StackOverflow.Infra.Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("AuthorId");
+
+                    b.HasIndex("CategoryId");
 
                     b.ToTable("Question");
                 });
@@ -339,6 +362,11 @@ namespace Fiap.StackOverflow.Infra.Data.Migrations
                     b.HasOne("Fiap.StackOverflow.Core.Entities.Author", "Author")
                         .WithMany("Questions")
                         .HasForeignKey("AuthorId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("Fiap.StackOverflow.Core.Entities.Category", "Category")
+                        .WithMany("Questions")
+                        .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Restrict);
                 });
 

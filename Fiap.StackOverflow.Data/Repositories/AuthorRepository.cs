@@ -20,5 +20,10 @@ namespace Fiap.StackOverflow.Infra.Data.Repositories
         {
             return _context.Authors.FirstOrDefault(x => x.IdentityId.ToString() == id);
         }
+
+        public Author GetCompleteById(int id)
+        {
+            return _context.Authors.FirstOrDefault(x => x.Id == id);
+        }
     }
 }

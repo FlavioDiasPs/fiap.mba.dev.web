@@ -60,8 +60,10 @@ namespace Fiap.StackOverflow.Web
 
             serviceCollection.AddTransient<IQuestionService, QuestionService>();
             serviceCollection.AddTransient<IAuthorService, AuthorService>();
+            serviceCollection.AddTransient<ICategoryService, CategoryService>();
             serviceCollection.AddTransient<IAnswerService, AnswerService>();
 
+            serviceCollection.AddTransient<ICategoryRepository, CategoryRepository>();
             serviceCollection.AddTransient<IAuthorRepository, AuthorRepository>();
             serviceCollection.AddTransient<IQuestionRepository, QuestionRepository>();
             serviceCollection.AddTransient<IAnswerRepository, AnswerRepository>();
