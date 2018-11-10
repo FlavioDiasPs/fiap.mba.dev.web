@@ -1,4 +1,5 @@
 ﻿using Fiap.StackOverflow.Core.Entities;
+using Fiap.StackOverflow.Core.Interfaces.Repositories;
 using Fiap.StackOverflow.Core.Interfaces.Services;
 using System;
 using System.Collections.Generic;
@@ -7,34 +8,35 @@ namespace Fiap.StackOverflow.Core.Services
 {
     public class AnswerService : IAnswerService
     {
+        private readonly IAnswerRepository _repository;
+
+        public AnswerService(IAnswerRepository repository)
+        {
+            _repository = repository;
+        }
         public void Add(Answer obj)
         {
-            throw new NotImplementedException();
-        }
-
-        public void Dispose()
-        {
-            throw new NotImplementedException();
+            _repository.Add(obj);
         }
 
         public IEnumerable<Answer> GetAll()
         {
-            throw new NotImplementedException();
+            return _repository.GetAll();
         }
 
         public Answer GetById(int id)
         {
-            throw new NotImplementedException();
-        }
+            return _repository.GetById(id);
+        }   
 
         public void Remove(Answer obj)
         {
-            throw new NotImplementedException();
+            _repository.Remove(obj);
         }
 
         public void Update(Answer obj)
         {
-            throw new NotImplementedException();
+            _repository.Update(obj);
         }
     }
 }

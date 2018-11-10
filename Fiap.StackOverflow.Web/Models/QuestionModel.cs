@@ -18,7 +18,7 @@ namespace Fiap.StackOverflow.Web.Models
             Answers = new List<AnswerModel>()
             {
                 new AnswerModel(1, "Description lala", 1),
-                new AnswerModel(2, "teu cu haha", 2)
+                new AnswerModel(2, "teu haha", 2)
             };
         }
 

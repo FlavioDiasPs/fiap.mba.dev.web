@@ -112,9 +112,9 @@ namespace Fiap.StackOverflow.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, [Bind("Id,Title,Description")] QuestionModel questionModel)
         {
-
-            if (ModelState.IsValid)
-            {
+            //Adicionada o filter no mvc em startup pra não precisar validar model
+            //if (ModelState.IsValid)
+            //{
                 var question = _questionService.GetById(id);
 
                 try
@@ -135,8 +135,8 @@ namespace Fiap.StackOverflow.Web.Controllers
                     _unitOfWork.RollbackTransaction();
                     return View();
                 }
-            }
-            return View();
+            //}
+            //return View();
         }
 
         public ActionResult Delete(int id)

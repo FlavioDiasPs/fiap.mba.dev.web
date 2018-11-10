@@ -15,6 +15,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Identity.UI.Services;
+using Fiap.StackOverflow.Web.Attributes;
 
 namespace Fiap.StackOverflow.Web
 {
@@ -31,7 +32,7 @@ namespace Fiap.StackOverflow.Web
 
         public void ConfigureServices(IServiceCollection serviceCollection)
         {
-            serviceCollection.AddAutoMapper();
+            serviceCollection.AddAutoMapper();            
 
             serviceCollection.AddDbContext<StackOverflowContext>(options => options.UseSqlServer(ConnectionString));
 
@@ -67,7 +68,11 @@ namespace Fiap.StackOverflow.Web
             serviceCollection.AddTransient<IQuestionRepository, QuestionRepository>();
             serviceCollection.AddTransient<IAnswerRepository, AnswerRepository>();
             
-            serviceCollection.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1); 
+            serviceCollection.AddMvc(options =>
+            {
+                //Faz com que seja desnecessário validar o model em toda ação
+                options.Filters.Add(new ModelValidationFilter()); 
+            }).SetCompatibilityVersion(CompatibilityVersion.Version_2_1); 
 
         }
 
@@ -77,8 +82,7 @@ namespace Fiap.StackOverflow.Web
 
             if (hostingEnvironment.IsDevelopment())
                 applicationBuilder.UseDeveloperExceptionPage();
-
-
+            
             applicationBuilder.UseHttpsRedirection();
             applicationBuilder.UseStaticFiles();
 
