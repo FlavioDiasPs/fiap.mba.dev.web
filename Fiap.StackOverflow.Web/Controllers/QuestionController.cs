@@ -14,7 +14,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Fiap.StackOverflow.Infra.Data.IdentityExtension;
 using System.Security.Claims;
-
+using System.Collections.Generic;
 
 namespace Fiap.StackOverflow.Web.Controllers
 {
@@ -54,6 +54,11 @@ namespace Fiap.StackOverflow.Web.Controllers
         public ActionResult Details(int id)
         {
             var question = _questionService.GetCompleteById(id);
+            ViewBag.LastestQuestions = _questionService.GetAll()
+                                            .OrderByDescending(x => x.Id)
+                                            .Take(5)
+                                            .Select(x => new KeyValuePair<int, string>(x.Id, x.Title))
+                                            .ToList();
 
             return View(_mapper.Map<QuestionModel>(question));
         }

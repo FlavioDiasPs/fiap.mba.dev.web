@@ -5,41 +5,252 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
+<div class="container-fluid" style="margin-top: 80px;">
+    <div id="wrapper">
+        <div id="content" style="margin-bottom: 20px;">
+            <div class="posts" style="margin-bottom: 50px;">
+                <div class="question_list">
+                    <span class="answers_total">
+                        <a href="index.html#commentarea">@Model.Answers.Count </a>   Respostas
+                    </span>
 
-<div>
-    <h4>@Html.DisplayFor(model => model.Title)</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            <button asp-action="" value="Vote" onclick="onAddVote()" runat="server">Vote</button>
-            @Html.DisplayFor(model => model.Vote)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Author)
-        </dd>
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-    </dl>
+                    <h1>@Html.DisplayFor(model => model.Title)</h1>
+                    <p>
+                        <span class="user">Asked by: <strong><a href="../author/sd%2cjns-jv/index.html" title="Posts by sd,jns jv" rel="author">@Model.Author</a></strong> </span>
+                        <span class="views"><b>@Model.Views</b> views</span>
+                        <span class="ptags">
+                            @foreach (var tag in Model.Tags)
+                            {
+                                var text = tag + " ";
+                                <a href="#" rel="tag">
+                                    @Html.DisplayFor(tagItem => text)
+                                </a>
+                            }
+                            <br>
+                        </span>		<span class="pcate">
+                            <a href="../category/uncategorized/index.html" rel="category tag">@Model.Category</a>
+                        </span>
+                    </p>
+                </div> <!-- question #end -->
+                <div class="question-desc">
+                    <p>@Model.Description</p>
+
+                </div>
+            </div>
+            <h2 style="margin-bottom: 20px;">Respostas:</h2>
+            <ol class="commentlist" style="margin-bottom: 0px;">
+                <li class="comment wrap threaded clearfix  " id="comment-37">
+                    <div class="votes">
+                        <p><span id="karma-37-total" class="bnone">0 <b>Votes</b></span> <img style="padding: 0px; border: none; cursor: pointer;" class="up-thumb" id="up-37" src="https://demo.templatic.com/answers/wp-content/themes/Answers/images/2_14_up.png" alt="Thumb up" onclick="javascript:ckratingKarma('37', 'add', 'https://demo.templatic.com/answers/?ptype=crating', '2_14_');" title=""> <span id="karma-37-up" style=";" class="up_points">0 <b>Votes</b></span>&nbsp;<img style="padding: 0px; border: none; cursor: pointer;" class="down-thumb" id="down-37" src="https://demo.templatic.com/answers/wp-content/themes/Answers/images/2_14_down.png" alt="Thumb down" onclick="javascript:ckratingKarma('37', 'subtract', 'https://demo.templatic.com/answers/?ptype=crating', '2_14_')" title=""> <span id="karma-37-down" style=";" class="down_points">0 <b>Votes</b></span></p>
+                    </div>
+                    <div class="content_left">
+                        <p>it sounds to me like you were hungry too, a similar thing happened to me </p>
+                        <p class="author">
+                            <img name="user_photo" class="agent_photo" id="user_photo" src="https://demo.templatic.com/answers/wp-content/themes/Answers/images/avatar_post.png" width="38" height="38">
+                            <span class="auhtor_name">
+                                <strong>
+                                    <a href="https://demo.templatic.com/answers/author/satyajit/">scott</a>
+                                </strong>  <small>- Apr 01, 2018 </small>
+                            </span>
+                            <span class="comments_links">
+                                |
+
+                            </span>
+                        </p>
+                    </div>
+
+
+                    <span class="comm-reply">
+                    </span>
+                </li><!-- #comment-## -->
+                @foreach (var answer in Model.Answers)
+                {
+
+
+                }
+            </ol>
+
+
+            <div id="respond" style="padding-top: 0px;">
+                <h3>Responder Questão</h3>
+                <div class="cancel-comment-reply">
+
+                    <a rel="nofollow" id="cancel-comment-reply-link" href="/answers/wordpress-themes-club/#respond" style="display:none;">Click here to cancel reply.</a>
+                </div>
+
+
+                <form action="https://demo.templatic.com/answers/?ptype=add_comments" method="post" id="commentform">
+                    <input type="hidden" name="referer" id="referer" class="textfield2" value="https://demo.templatic.com/answers/wordpress-themes-club/">
+                    <p class="clearfix">
+                        <label> Sua resposta</label>
+                        <textarea name="comment" id="comment" rows="10" cols="10" tabindex="4" class="textarea" required=""></textarea>
+                    </p>
+
+                    @*<p class="clearfix">
+                        <label class="fix-label"> Sou</label>
+                        <input name="user_login_or_not" type="radio" value="existing_user" checked="" onclick="set_login_registration_frm(this.value);" class="radio">
+                        <span class="user_login"> Usuário Existente</span>
+
+                        <input name="user_login_or_not" type="radio" value="new_user" onclick="set_login_registration_frm(this.value);" class="radio">
+                        <span class="user_login">Novo Usuário? Registre Agora</span>
+
+                    </p>
+
+                    <p class="clearfix respond-col" id="login_user_frm_id">
+                        <label class="label-col">
+                            Username <span class="indicates">*	</span>
+
+                            <input type="text" name="log" id="user_log" class="textfield2" value="" size="22" tabindex="1" required="">
+                        </label>
+
+
+                        <label class="label-col">
+                            Password <span class="indicates">*</span>
+                            <input type="password" name="pwd" id="user_pass" class="textfield2" value="" size="22" tabindex="1" required="">
+                        </label>
+
+                    </p>
+
+                    <div id="contact_detail_id" style="display:none;">
+                        <p class="clearfix">
+                            <label for="author">  Name <span class="indicates">*</span> </label>
+                            <input type="text" name="user_fname" id="user_fname" class="textfield" value="" size="22" tabindex="1">
+
+                        </p>
+
+                        <p class="clearfix">
+                            <label for="email"> Email <span class="indicates">*</span> </label>
+                            <input type="text" name="user_email" id="user_email" class="textfield" value="" size="22" tabindex="2">
+
+                        </p>
+
+                        <p class="clearfix">
+                            <label for="url"> Password <span class="indicates">*</span></label>
+                            <input type="password" name="user_pwd" id="user_pwd" class="textfield" value="" size="22" tabindex="3">
+
+                        </p>
+                    </div>
+                    *@
+                    <script type="text/javascript" src="https://demo.templatic.com/answers/wp-content/themes/Answers/library/js/question_validation.js"></script>
+                    <script language="javascript" type="text/javascript">
+                    </script>
+                    <div class="aleft">
+                        <input type="hidden" name="comment_post_ID" value="53" id="comment_post_ID">
+                        <input type="hidden" name="comment_parent" id="comment_parent" value="0">
+
+                    </div>
+
+                    <div id="comment_captcha"></div>            <div id="recaptcha-submit-btn-area">&nbsp;<input name="submit" type="submit" id="submit" class="" value="Enviar" tabindex="6"></div>
+                    <noscript>
+                        <style type='text/css'>
+                            #submit {
+                                display: none;
+                            }
+                        </style>
+                        <input name="submit" type="submit" id="submit-alt" tabindex="6"
+                               value="Submit Comment" />
+                    </noscript>
+                </form>
+
+
+                <div class="fix"></div>
+
+            </div>
+        </div> <!-- content #end -->
+        <div id="sidebar">
+
+            <a href="@Url.Action("Create", "Question")" class="b_askquestions">Faça uma Pergunta</a>
+
+
+
+            <div class="widget">
+                <div class="textwidget"><a href="http://www.fiap.com.br" target="_blank"><img src="http://vtexday.vtex.com/wp-content/uploads/2018/02/FIAP-logo-.jpg" style="max-width:300px;"></a></div>
+            </div>
+            <div class="widget login_widget">
+
+
+                <h3>Login </h3>
+                <form name="loginform" id="loginform" action="https://demo.templatic.com/answers/index.php?ptype=login" method="post">
+                    <div class="form_row"><label>User Name  <span>*</span></label>  <input name="log" id="user_login1" type="text" class="textfield"> <span id="user_loginInfo"></span> </div>
+                    <div class="form_row"><label>Password  <span>*</span></label>  <input name="pwd" id="user_pass1" type="password" class="textfield"><span id="user_passInfo"></span>  </div>
+
+                    <input type="hidden" name="redirect_to" value="https://demo.templatic.com/answers/">
+                    <input type="hidden" name="testcookie" value="1">
+
+                    <input type="submit" name="submit" value="Sign In" class="btn_input_highlight">
+                </form>
+
+            </div>
+
+            <div class="widget">
+                <div class="latestnewshome">
+                    <h3>Latest Questions</h3> <ul>
+    @foreach (var lastestAnswer in (List<KeyValuePair<int, string>>)ViewBag.LastestQuestions)
+    {
+        <li class="clearfix">
+            <a class="widget-title" href="@Url.Action("Details", "Question", new { id = lastestAnswer.Key })">@lastestAnswer.Value
+        </li>
+
+    }    
+</ul>
+                </div>
+            </div>
+            <div class="widget">
+                <div class="testimonials">
+
+                    <h3>Testimonials</h3>
+
+                    <blockquote>
+                        <p class="endquote">
+                            erat nulla fermentum diam Praesent aliquam,  justo convallis luctus rutrum, erat nulla fermentum diam,
+                        </p>
+                    </blockquote>
+                    <cite>- Robbin</cite>
+
+
+                </div>
+            </div>
+
+
+
+
+
+
+            <div class="widget tagcloud clearfix">
+                <h3 class="tags">Tag Clouds </h3>
+
+                <a href="../tag/bands/index.html" class="tag-cloud-link tag-link-12 tag-link-position-1" style="font-size: 10pt;" aria-label="bands (1 item)">bands</a>
+                <a href="../tag/date/index.html" class="tag-cloud-link tag-link-19 tag-link-position-2" style="font-size: 10pt;" aria-label="date (1 item)">date</a>
+                <a href="../tag/dating/index.html" class="tag-cloud-link tag-link-9 tag-link-position-3" style="font-size: 10pt;" aria-label="dating (1 item)">dating</a>
+                <a href="../tag/depressed/index.html" class="tag-cloud-link tag-link-10 tag-link-position-4" style="font-size: 10pt;" aria-label="depressed (1 item)">depressed</a>
+                <a href="../tag/ebay/index.html" class="tag-cloud-link tag-link-8 tag-link-position-5" style="font-size: 10pt;" aria-label="ebay (1 item)">ebay</a>
+                <a href="../tag/elkgh/index.html" class="tag-cloud-link tag-link-32 tag-link-position-6" style="font-size: 10pt;" aria-label="elkgh (1 item)">elkgh</a>
+                <a href="../tag/flat-and-skinny/index.html" class="tag-cloud-link tag-link-21 tag-link-position-7" style="font-size: 10pt;" aria-label="flat and skinny (1 item)">flat and skinny</a>
+                <a href="../tag/girly-girl/index.html" class="tag-cloud-link tag-link-20 tag-link-position-8" style="font-size: 10pt;" aria-label="girly girl (1 item)">girly girl</a>
+                <a href="../tag/good-songs/index.html" class="tag-cloud-link tag-link-15 tag-link-position-9" style="font-size: 10pt;" aria-label="good songs (1 item)">good songs</a>
+                <a href="../tag/guys-think/index.html" class="tag-cloud-link tag-link-17 tag-link-position-10" style="font-size: 10pt;" aria-label="guys think (1 item)">guys think</a>
+                <a href="../tag/gwkhwg/index.html" class="tag-cloud-link tag-link-33 tag-link-position-11" style="font-size: 10pt;" aria-label="gwkhwg (1 item)">gwkhwg</a>
+                <a href="../tag/hkhf/index.html" class="tag-cloud-link tag-link-30 tag-link-position-12" style="font-size: 10pt;" aria-label="hkhf (1 item)">hkhf</a>
+                <a href="../tag/home-value/index.html" class="tag-cloud-link tag-link-6 tag-link-position-13" style="font-size: 10pt;" aria-label="home value (1 item)">home value</a>
+                <a href="../tag/house/index.html" class="tag-cloud-link tag-link-13 tag-link-position-14" style="font-size: 10pt;" aria-label="house (1 item)">house</a>
+                <a href="../tag/increase-home-value/index.html" class="tag-cloud-link tag-link-7 tag-link-position-15" style="font-size: 10pt;" aria-label="Increase home value (1 item)">Increase home value</a>
+                <a href="../tag/job/index.html" class="tag-cloud-link tag-link-18 tag-link-position-16" style="font-size: 10pt;" aria-label="job (1 item)">job</a>
+                <a href="../tag/khfkh/index.html" class="tag-cloud-link tag-link-31 tag-link-position-17" style="font-size: 10pt;" aria-label="khfkh (1 item)">khfkh</a>
+                <a href="../tag/lk/index.html" class="tag-cloud-link tag-link-34 tag-link-position-18" style="font-size: 10pt;" aria-label="lk (1 item)">lk</a>
+                <a href="../tag/memorial-day/index.html" class="tag-cloud-link tag-link-14 tag-link-position-19" style="font-size: 10pt;" aria-label="memorial day (1 item)">memorial day</a>
+                <a href="../tag/pimple/index.html" class="tag-cloud-link tag-link-16 tag-link-position-20" style="font-size: 10pt;" aria-label="pimple (1 item)">pimple</a>
+                <a href="../tag/screamo/index.html" class="tag-cloud-link tag-link-22 tag-link-position-21" style="font-size: 10pt;" aria-label="screamo (1 item)">screamo</a>
+                <a href="../tag/tattoo/index.html" class="tag-cloud-link tag-link-11 tag-link-position-22" style="font-size: 10pt;" aria-label="tattoo (1 item)">tattoo</a>
+            </div>
+
+
+
+
+        </div> <!-- sidebar #end -->
+    </div>
+
+    <div>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    </div>
+
 </div>
-
-<div>
-    <h4>Answers</h4>
-    <dl class="dl-horizontal">
-        <dt>
-            @foreach (var item in Model.Answers)
-            {
-
-                @Html.DisplayFor(model => item.Description)
-
-            }
-        </dt>
-    </dl>
-
-</div>
-
-<div>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id  }) |
-</div>
-

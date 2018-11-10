@@ -21,6 +21,8 @@ namespace Fiap.StackOverflow.Web.Models
                 new AnswerModel(1, "Description lala", 1),
                 new AnswerModel(2, "teu haha", 2)
             };
+            Views = 99;
+            Category = "Net Core";
         }
 
         public int Id { get; set; }
@@ -46,6 +48,10 @@ namespace Fiap.StackOverflow.Web.Models
         public List<SelectListItem> Categories { get; set; }
         public List<AnswerModel> Answers { get; set; }
 
+        public int Views { get; set; }
+
+        public string Category { get; set; }
+
         public static explicit operator QuestionModel(Question question)
         {
             return new QuestionModel()
@@ -54,7 +60,8 @@ namespace Fiap.StackOverflow.Web.Models
                 AuthorId = question.AuthorId,
                 Description = question.Description,
                 Id = question.Id,
-                Title = question.Title
+                Title = question.Title,
+                Views = question.ViewCount                
             };
         }
     }
