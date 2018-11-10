@@ -70,7 +70,7 @@ namespace Fiap.StackOverflow.Web.Controllers
                 {
                     _authorService.Add(author);
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     throw;
                 }
