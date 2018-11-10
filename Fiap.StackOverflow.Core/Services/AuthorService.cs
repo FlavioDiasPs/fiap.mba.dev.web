@@ -3,6 +3,7 @@ using Fiap.StackOverflow.Core.Interfaces.Repositories;
 using Fiap.StackOverflow.Core.Interfaces.Services;
 using Fiap.StackOverflow.Core.Interfaces.Services.Base;
 using System;
+using System.Linq;
 using System.Collections.Generic;
 
 namespace Fiap.StackOverflow.Core.Services
@@ -29,6 +30,10 @@ namespace Fiap.StackOverflow.Core.Services
         public Author GetById(int id)
         {
             return _repository.GetById(id);
+        }
+        public Author GetCompleteById(int id)
+        {
+            return _repository.GetCompleteById(id);
         }
 
         public Author GetByIdentityId(string id)

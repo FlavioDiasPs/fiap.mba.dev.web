@@ -11,11 +11,11 @@
 <div class="row">
     <div class="col-md-4">        
         <form asp-action="Create">
+            <input type="hidden" asp-for="AuthorId" class="form-control" />
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="AuthorId" class="control-label"></label>
-                <input asp-for="AuthorId" class="form-control" />
-                @*<select asp-for="AuthorId" class="form-control" asp-items="Model.Authors"></select>*@
+                <label asp-for="CategoryId" class="control-label"></label>
+                <select asp-for="CategoryId" class="form-control" asp-items="Model.Categories"></select>
                 <span asp-validation-for="AuthorId" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -30,7 +30,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Tags" class="control-label"></label>
-                <input asp-for="Author" class="form-control" asp-items="Model.Tags"/>
+                <input asp-for="Author" class="form-control" asp-items="Model.Tags" />
                 <span asp-validation-for="Tags" class="text-danger"></span>
             </div>
             <div class="form-group">

@@ -24,13 +24,15 @@ namespace Fiap.StackOverflow.Web.Controllers
         private readonly IUnitOfWork _unitOfWork;
         private readonly IAuthorService _authorService;
         private readonly IMapper _mapper;
+        private readonly ICategoryService _categoryService;
 
-        public QuestionController(IMapper mapper, IUnitOfWork unitOfWork, IQuestionService questionService, IAuthorService authorService) : base(unitOfWork)
+        public QuestionController(IMapper mapper, IUnitOfWork unitOfWork, IQuestionService questionService, IAuthorService authorService, ICategoryService categoryService) : base(unitOfWork)
         {
             _questionService = questionService;
             _unitOfWork = unitOfWork;
             _authorService = authorService;
             _mapper = mapper;
+            _categoryService = categoryService;
         }
         public ActionResult Index()
         {
@@ -55,10 +57,11 @@ namespace Fiap.StackOverflow.Web.Controllers
 
             return View(_mapper.Map<QuestionModel>(question));
         }
-        //[Authorize]
+        [Authorize]
         public ActionResult Create()
         {
             var m = new QuestionModel();
+            
             LoadCreate(m);
 
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -114,7 +117,7 @@ namespace Fiap.StackOverflow.Web.Controllers
         }
         private QuestionModel LoadCreate(QuestionModel questionModel)
         {
-            questionModel.Authors = _authorService.GetAll().Select(x => new SelectListItem()
+            questionModel.Categories = _categoryService.GetAll().Select(x => new SelectListItem()
              {
                  Value = x.Id.ToString(),
                  Text = x.Name.ToString()

@@ -1,12 +1,9 @@
 ﻿using Fiap.StackOverflow.Core.Entities;
 using Fiap.StackOverflow.Core.Interfaces.Repositories.Base;
-using System;
 
 namespace Fiap.StackOverflow.Core.Interfaces.Repositories
 {
-    public interface IAuthorRepository : IRepositoryBase<Author>
+    public interface ICategoryRepository : IRepositoryBase<Category>
     {
-        Author GetByIdentityId(string id);
-        Author GetCompleteById(int id);
     }
 }
