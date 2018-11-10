@@ -15,6 +15,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Identity.UI.Services;
+using Fiap.StackOverflow.Web.Attributes;
 
 namespace Fiap.StackOverflow.Web
 {
@@ -31,7 +32,7 @@ namespace Fiap.StackOverflow.Web
 
         public void ConfigureServices(IServiceCollection serviceCollection)
         {
-            serviceCollection.AddAutoMapper();
+            serviceCollection.AddAutoMapper();            
 
             serviceCollection.AddDbContext<StackOverflowContext>(options => options.UseSqlServer(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Jonas\source\repos\Fiap.StackOverflow.Web\Fiap.StackOverflow.Data\App_Data\dbStackOverflow.mdf;Integrated Security=True;Connect Timeout=30"));
 
@@ -65,7 +66,11 @@ namespace Fiap.StackOverflow.Web
             serviceCollection.AddTransient<IQuestionRepository, QuestionRepository>();
             serviceCollection.AddTransient<IAnswerRepository, AnswerRepository>();
             
-            serviceCollection.AddMvc(); 
+            serviceCollection.AddMvc(options =>
+            {
+                //Faz com que seja desnecessário validar o model em toda ação
+                options.Filters.Add(new ModelValidationFilter()); 
+            }).SetCompatibilityVersion(CompatibilityVersion.Version_2_1); 
 
         }
 
@@ -74,12 +79,11 @@ namespace Fiap.StackOverflow.Web
             ConnectionString = Configuration["ConnectionStrings:DefaultConnection"];
 
             if (hostingEnvironment.IsDevelopment())
-                app.UseDeveloperExceptionPage();
+                applicationBuilder.UseDeveloperExceptionPage();
 
 
-            //app.UseHttpsRedirection();
-
-            app.UseStaticFiles();
+            applicationBuilder.UseHttpsRedirection();
+            applicationBuilder.UseStaticFiles();
 
             app.UseAuthentication();
 
