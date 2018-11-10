@@ -24,7 +24,6 @@ namespace Fiap.StackOverflow.Web.Models
             Views = 99;
             Category = "Net Core";
         }
-
         public int Id { get; set; }
         //public UserModel Author { get; set; }
         public string Author { get; set; }
@@ -61,8 +60,10 @@ namespace Fiap.StackOverflow.Web.Models
                 Description = question.Description,
                 Id = question.Id,
                 Title = question.Title,
-                Views = question.ViewCount                
-            };
+                Views = question.ViewCount
+                
+
+        };
         }
     }
 }
