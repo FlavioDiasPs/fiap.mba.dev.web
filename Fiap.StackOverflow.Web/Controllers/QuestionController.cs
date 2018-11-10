@@ -89,7 +89,7 @@ namespace Fiap.StackOverflow.Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind("AuthorId,Title,Description")] QuestionModel questionModel)
+        public ActionResult Create([Bind("AuthorId,CategoryId,Title,Description")] QuestionModel questionModel)
         {
             var m = new QuestionModel();
             LoadCreate(m);
@@ -98,7 +98,7 @@ namespace Fiap.StackOverflow.Web.Controllers
             {
                 try
                 {
-                    var question = new Question(questionModel.AuthorId, questionModel.Title, questionModel.Description);
+                    var question = new Question(questionModel.AuthorId, questionModel.CategoryId, questionModel.Title, questionModel.Description);
 
                     _unitOfWork.BeginTransactionAnsyc();
 
