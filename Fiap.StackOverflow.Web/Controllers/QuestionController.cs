@@ -14,7 +14,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Fiap.StackOverflow.Infra.Data.IdentityExtension;
 using System.Security.Claims;
-
+using System.Collections.Generic;
 
 namespace Fiap.StackOverflow.Web.Controllers
 {
@@ -24,13 +24,15 @@ namespace Fiap.StackOverflow.Web.Controllers
         private readonly IUnitOfWork _unitOfWork;
         private readonly IAuthorService _authorService;
         private readonly IMapper _mapper;
+        private readonly ICategoryService _categoryService;
 
-        public QuestionController(IMapper mapper, IUnitOfWork unitOfWork, IQuestionService questionService, IAuthorService authorService) : base(unitOfWork)
+        public QuestionController(IMapper mapper, IUnitOfWork unitOfWork, IQuestionService questionService, IAuthorService authorService, ICategoryService categoryService) : base(unitOfWork)
         {
             _questionService = questionService;
             _unitOfWork = unitOfWork;
             _authorService = authorService;
             _mapper = mapper;
+            _categoryService = categoryService;
         }
         public ActionResult Index()
         {
@@ -52,13 +54,19 @@ namespace Fiap.StackOverflow.Web.Controllers
         public ActionResult Details(int id)
         {
             var question = _questionService.GetCompleteById(id);
+            ViewBag.LastestQuestions = _questionService.GetAll()
+                                            .OrderByDescending(x => x.Id)
+                                            .Take(5)
+                                            .Select(x => new KeyValuePair<int, string>(x.Id, x.Title))
+                                            .ToList();
 
             return View(_mapper.Map<QuestionModel>(question));
         }
-        //[Authorize]
+        [Authorize]
         public ActionResult Create()
         {
             var m = new QuestionModel();
+            
             LoadCreate(m);
 
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -81,7 +89,7 @@ namespace Fiap.StackOverflow.Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind("AuthorId,Title,Description")] QuestionModel questionModel)
+        public ActionResult Create([Bind("AuthorId,CategoryId,Title,Description")] QuestionModel questionModel)
         {
             var m = new QuestionModel();
             LoadCreate(m);
@@ -90,7 +98,7 @@ namespace Fiap.StackOverflow.Web.Controllers
             {
                 try
                 {
-                    var question = new Question(questionModel.AuthorId, questionModel.Title, questionModel.Description);
+                    var question = new Question(questionModel.AuthorId, questionModel.CategoryId, questionModel.Title, questionModel.Description);
 
                     _unitOfWork.BeginTransactionAnsyc();
 
@@ -114,7 +122,7 @@ namespace Fiap.StackOverflow.Web.Controllers
         }
         private QuestionModel LoadCreate(QuestionModel questionModel)
         {
-            questionModel.Authors = _authorService.GetAll().Select(x => new SelectListItem()
+            questionModel.Categories = _categoryService.GetAll().Select(x => new SelectListItem()
              {
                  Value = x.Id.ToString(),
                  Text = x.Name.ToString()

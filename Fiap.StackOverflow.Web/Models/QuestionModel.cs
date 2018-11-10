@@ -14,12 +14,15 @@ namespace Fiap.StackOverflow.Web.Models
         {
             Tags = new List<string>() { "C#", "JAVA", "RenatoGay"};
             Authors = new List<SelectListItem>();
+            Categories = new List<SelectListItem>();
             Vote = 10;
             Answers = new List<AnswerModel>()
             {
                 new AnswerModel(1, "Description lala", 1),
                 new AnswerModel(2, "teu haha", 2)
             };
+            Views = 99;
+            Category = "Net Core";
         }
 
         public int Id { get; set; }
@@ -28,6 +31,9 @@ namespace Fiap.StackOverflow.Web.Models
 
         [Required(ErrorMessage = "Preencher campo AuthorId")]
         public int AuthorId { get; set; }
+
+        [Required(ErrorMessage = "Preencher campo Categoria")]
+        public int CategoryId { get; set; }
 
         [Required(ErrorMessage = "Preencher campo Title"), MaxLength(100)]
         public string Title { get; set; }
@@ -39,7 +45,12 @@ namespace Fiap.StackOverflow.Web.Models
         public List<SelectListItem> Authors { get; set; }
         public int Vote { get; set; }
 
+        public List<SelectListItem> Categories { get; set; }
         public List<AnswerModel> Answers { get; set; }
+
+        public int Views { get; set; }
+
+        public string Category { get; set; }
 
         public static explicit operator QuestionModel(Question question)
         {
@@ -49,7 +60,8 @@ namespace Fiap.StackOverflow.Web.Models
                 AuthorId = question.AuthorId,
                 Description = question.Description,
                 Id = question.Id,
-                Title = question.Title
+                Title = question.Title,
+                Views = question.ViewCount                
             };
         }
     }

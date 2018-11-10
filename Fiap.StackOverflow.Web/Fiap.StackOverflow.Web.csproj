@@ -44,4 +44,19 @@
   <ItemGroup>
     <Folder Include="Areas\Identity\Services\" />
   </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\fonts\fontawesome-webfont3295.svg" />
+    <None Include="wwwroot\fonts\fontawesome-webfont3295.woff2" />
+    <None Include="wwwroot\images\banner1.svg" />
+    <None Include="wwwroot\images\banner2.svg" />
+    <None Include="wwwroot\images\banner3.svg" />
+    <None Include="wwwroot\library\js\blogger.js" />
+    <None Include="wwwroot\library\js\ck-karma.js" />
+    <None Include="wwwroot\library\js\contact_us_validation.js" />
+    <None Include="wwwroot\library\js\menu.js" />
+    <None Include="wwwroot\library\js\modernizr.min.js" />
+    <None Include="wwwroot\library\js\question_validation.js" />
+    <None Include="wwwroot\library\js\reg_validation.js" />
+  </ItemGroup>
 </Project>

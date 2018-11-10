@@ -1,5 +1,4 @@
 ﻿using Fiap.StackOverflow.Core.Entities.Base;
-using System;
 using System.Collections.Generic;
 
 namespace Fiap.StackOverflow.Core.Entities
@@ -17,11 +16,11 @@ namespace Fiap.StackOverflow.Core.Entities
 
         }
         public string Name { get; set; }
+        //public IdentityUser IdentityUser { get; set; }
         public string IdentityId { get; set; }
         public int QuestionCount { get; set; }
         public int CommentCount { get; set; }
         public IEnumerable<Question> Questions { get; set; }
         public IEnumerable<Answer> Answers { get; set; }
     }
-    
 }

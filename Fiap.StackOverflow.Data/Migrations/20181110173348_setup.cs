@@ -58,13 +58,27 @@ namespace Fiap.StackOverflow.Infra.Data.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(unicode: false, maxLength: 256, nullable: true),
+                    IdentityId = table.Column<string>(unicode: false, maxLength: 256, nullable: true),
                     QuestionCount = table.Column<int>(nullable: false),
-                    CommentCount = table.Column<int>(nullable: false),
-                    IdentityId = table.Column<Guid>(nullable: false)
+                    CommentCount = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Author", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Category",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(unicode: false, maxLength: 256, nullable: true),
+                    Description = table.Column<string>(unicode: false, maxLength: 256, nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Category", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -180,6 +194,7 @@ namespace Fiap.StackOverflow.Infra.Data.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     AuthorId = table.Column<int>(nullable: false),
+                    CategoryId = table.Column<int>(nullable: false),
                     Title = table.Column<string>(unicode: false, maxLength: 128, nullable: false),
                     Description = table.Column<string>(unicode: false, maxLength: 256, nullable: false),
                     ViewCount = table.Column<int>(nullable: false)
@@ -191,6 +206,12 @@ namespace Fiap.StackOverflow.Infra.Data.Migrations
                         name: "FK_Question_Author_AuthorId",
                         column: x => x.AuthorId,
                         principalTable: "Author",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Question_Category_CategoryId",
+                        column: x => x.CategoryId,
+                        principalTable: "Category",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -276,6 +297,11 @@ namespace Fiap.StackOverflow.Infra.Data.Migrations
                 name: "IX_Question_AuthorId",
                 table: "Question",
                 column: "AuthorId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Question_CategoryId",
+                table: "Question",
+                column: "CategoryId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -309,6 +335,9 @@ namespace Fiap.StackOverflow.Infra.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "Author");
+
+            migrationBuilder.DropTable(
+                name: "Category");
         }
     }
 }

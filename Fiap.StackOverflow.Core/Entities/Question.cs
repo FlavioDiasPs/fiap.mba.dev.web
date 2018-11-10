@@ -9,9 +9,10 @@ namespace Fiap.StackOverflow.Core.Entities
         {
 
         }
-        public Question(int authorId, string title, string description)
+        public Question(int authorId, int categoryId, string title, string description)
         {
             AuthorId = authorId;
+            CategoryId = categoryId;
             Title = title;
             Description = description;
             Answers = new List<Answer>();
@@ -21,6 +22,8 @@ namespace Fiap.StackOverflow.Core.Entities
 
         public Author Author { get; set; }
         public int AuthorId { get; set; }
+        public Category Category { get; set; }
+        public int CategoryId { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
         //public List<string> Tags { get; set; }

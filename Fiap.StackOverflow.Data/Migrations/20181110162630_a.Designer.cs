@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Fiap.StackOverflow.Infra.Data.Migrations
 {
     [DbContext(typeof(StackOverflowContext))]
-    [Migration("20181110042942_setup1")]
-    partial class setup1
+    [Migration("20181110162630_a")]
+    partial class a
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

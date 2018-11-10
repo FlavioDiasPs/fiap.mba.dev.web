@@ -18,6 +18,7 @@ namespace Fiap.StackOverflow.Infra.Data.EntityFramework
         public DbSet<Question> Questions { get; set; }
         public DbSet<Answer> Answers { get; set; }
         public DbSet<Author> Authors { get; set; }
+        public DbSet<Category> Categories { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -25,6 +26,7 @@ namespace Fiap.StackOverflow.Infra.Data.EntityFramework
             modelBuilder.ApplyConfiguration(new MapAuthor());
             modelBuilder.ApplyConfiguration(new MapQuestion());
             modelBuilder.ApplyConfiguration(new MapAnswser());
+            modelBuilder.ApplyConfiguration(new MapCategory());
             foreach (var property in modelBuilder.Model.GetEntityTypes()
                 .SelectMany(t => t.GetProperties())
                 .Where(p => p.ClrType == typeof(string)))
@@ -43,7 +45,7 @@ namespace Fiap.StackOverflow.Infra.Data.EntityFramework
         //public string conn = "@\"Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\Jonas\\source\\repos\\Fiap.StackOverflow.Web\\Fiap.StackOverflow.Data\\App_Data\\dbStackOverflow.mdf;Integrated Security=True;Connect Timeout=30;Database=DefaultConnection (AspnetIdentitySample); Truste";
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\Juninho\\Source\\Repos\\fiap.mba.dev.web\\Fiap.StackOverflow.Data\\AppData\\dbStackOverFlow.mdf;Integrated Security=True;Connect Timeout=30");
+            optionsBuilder.UseSqlServer(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Jonas\source\repos\Fiap.StackOverflow.Web\Fiap.StackOverflow.Data\App_Data\dbStackOverflow.mdf;Integrated Security=True;Connect Timeout=30");
         }
 
     }
