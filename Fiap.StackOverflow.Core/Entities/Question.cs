@@ -9,9 +9,10 @@ namespace Fiap.StackOverflow.Core.Entities
         {
 
         }
-        public Question(int authorId, string title, string description)
+        public Question(int authorId, int categoryId, string title, string description)
         {
             AuthorId = authorId;
+            CategoryId = categoryId;
             Title = title;
             Description = description;
             Answers = new List<Answer>();
