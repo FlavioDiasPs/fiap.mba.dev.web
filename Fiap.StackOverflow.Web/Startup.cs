@@ -36,7 +36,7 @@ namespace Fiap.StackOverflow.Web
         {
             serviceCollection.AddAutoMapper();            
 
-            serviceCollection.AddDbContext<StackOverflowContext>(options => options.UseSqlServer(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Jonas\source\repos\Fiap.StackOverflow.Web\Fiap.StackOverflow.Data\App_Data\dbStackOverflow.mdf;Integrated Security=True;Connect Timeout=30"));
+            serviceCollection.AddDbContext<StackOverflowContext>(options => options.UseSqlServer(ConnectionString));
 
             //serviceCollection.AddDefaultIdentity<IdentityUser>()
             //    .AddEntityFrameworkStores<StackOverflowContext>();
