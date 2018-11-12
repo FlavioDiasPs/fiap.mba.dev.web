@@ -7,24 +7,26 @@
 
 
 
-<div id="wrapper" style="margin-top: 80px;">
+<div id="wrapper">
     <p>
         <a href="@Url.Action("Create", "Question")" class="b_askquestions" style="max-width: 300px;">Faça uma Pergunta</a>
     </p>
 
     <div id="content">
+        
 
-        @foreach (var item in Model.Questions)
+        @foreach (var item in Model.Questions.OrderByDescending(x => x.Id))
         {
+            var categoria = item.Category != null ? item.Category?.Name : "Sem categoria";
             <div class="question_list">
                 <span class="answers_total">
-                    <a href="@Url.Action("Details", "Question", new { id = item.Id })">@item.Answers.Count </a>   Respostas
+                    <a asp-controller="Question" asp-action="Details" asp-route-id="@item.Id">@item.Answers.Count </a>   Respostas
                 </span>
 
-                <h3> <a href="what-is-worpress/index.html" rel="bookmark" title="Permanent Link to What is worpress">@Html.ActionLink(item.Title, "Details", new { id = item.Id })</a></h3>
+                <h3> <a asp-controller="Question" asp-action="Details" asp-route-id="@item.Id"> @item.Title </a> </h3>
                 <p>
-                    <span class="user">Por: <strong><a href="author/sd%2cjns-jv/index.html" title="Posts by sd,jns jv" rel="author">@Html.DisplayFor(modelItem => item.Author)</a></strong> </span>
-                    <span class="views"><b>221 </b> views </span>
+                    <span class="user">Por: <strong><a href="#" title="Por: @item.Author.Name " rel="author">@item.Author.Name</a></strong> </span>
+                    <span class="views"><b>@item.ViewCount </b> visualizações </span>
                     <span class="ptags">
                         @foreach (var tag in item.QuestionTags)
                         {
@@ -34,11 +36,22 @@
                             </a>
                         }
                     </span>
-                    <span class="pcate">  <a href="#" rel="category tag">@item.Category.Name</a> </span>
+                    <span class="pcate">
+                            <a href="#" rel="category tag">@categoria</a>
+                    </span>
                 </p>
-            </div><!-- question #end -->
+
+
+            </div>
+
+
+
+
+
+
+            <!-- question #end -->
         }
-        <!-- question #end -->        
+        <!-- question #end -->
 
     </div> <!-- sidebar #end -->
 </div>

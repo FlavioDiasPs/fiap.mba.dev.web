@@ -5,46 +5,66 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Build your question</h2>
 
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <input type="hidden" asp-for="AuthorId" class="form-control" />
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="CategoryId" class="control-label"></label>
-                <select asp-for="CategoryId" class="form-control" asp-items="Model.Categories"></select>
-                <span asp-validation-for="AuthorId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Title" class="control-label"></label>
-                <input asp-for="Title" class="form-control" />
-                <span asp-validation-for="Title" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Description" class="control-label"></label>
-                <textarea asp-for="Description" rows="5" cols="40"></textarea>
-                <span asp-validation-for="Description" class="text-danger"></span>
-            </div>
 
-            <div class="form-group">
-                <label asp-for="Tags" class="control-label"></label>
-                @*<select asp-for="Tags" class="form-control" asp-items="Model.Tags"> </select>*@
-                <input type="hidden" />
-                <textarea asp-for="SelectedTags"></textarea>
-                <span asp-validation-for="Tags" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </form>
+<div class="container-fluid">
+    <div id="wrapper">
+
+        <div id="content">
+
+            <h1 class="page_head">Faça sua pergunta</h1>
+            <hr />
+            <form asp-action="Create" id="questionform">
+                <input type="hidden" asp-for="AuthorId" class="form-control" />
+
+                
+
+
+                <div class="ask_row">
+                    <label asp-for="CategoryId" class="control-label"></label>
+                    <select asp-for="CategoryId" class="textfield" asp-items="Model.Categories"></select>
+                    <span asp-validation-for="CategoryId" class="message_error message_error2"></span>
+                </div>
+
+                <div class="ask_row">
+
+                    <label asp-for="Title" class="control-label"></label>
+                    <input asp-for="Title" class="textfield" />
+                    <span asp-validation-for="Title" class="message_error message_error2"></span>
+                    <span class="notice"> </span>
+                </div>
+
+                <div class="ask_row">
+
+                    <label asp-for="Description" class="control-label"></label>
+                    <textarea asp-for="Description" class="textfield" rows="10" cols="40"></textarea>
+                    <span asp-validation-for="Description" class="message_error message_error2"></span>
+                </div>
+
+
+                <div class="ask_row">
+
+                    <label asp-for="Tags" class="control-label"></label>
+                    <input type="hidden" />
+                    <textarea asp-for="SelectedTags"  class="textfield textfield_tags"></textarea>
+                    <span asp-validation-for="Tags" class="message_error message_error2"></span>
+                    <span class="notice">   </span>
+                </div>
+
+                
+                <input name="submit" type="submit" id="submit" class="b_spacer3" value="Submit">
+            </form>
+        </div>
     </div>
 </div>
 
+
+
+
+
+
 <div>
-    <a asp-action="Index">Voltar</a>
+    
 </div>
 <script src="~/lib/tagify/dist/jQuery.tagify.min.js"></script>
 <script src="~/lib/tagify/dist/tagify.js"></script>

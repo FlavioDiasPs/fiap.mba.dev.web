@@ -77,13 +77,6 @@ namespace Fiap.StackOverflow.Web
             var apiAssembly = typeof(Fiap.StackOverflow.Api.Startup).GetTypeInfo().Assembly;
             var part = new AssemblyPart(apiAssembly);
 
-            serviceCollection.AddMvc(options =>
-            {
-                //Faz com que seja desnecessário validar o model em toda ação
-                options.Filters.Add(new ModelValidationFilter()); 
-            }).SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
-            .ConfigureApplicationPartManager(apm => apm.ApplicationParts.Add(part)); 
-
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment hostingEnvironment)

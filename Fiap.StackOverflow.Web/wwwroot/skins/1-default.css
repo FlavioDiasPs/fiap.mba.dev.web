@@ -1,4 +1,6 @@
-a, #content p.post_bottom a, .ask_row label, .pagination a { color:#444; }
+a, #content p.post_bottom a, .ask_row label, .pagination a {
+    color: #777;
+}
 
 body, h1.page_head, h1.single_head, #content .question_list h3, #content .question_list h3 a,
 #content p.more a, blockquote p, blockquote a, #content .post_top h2 a:hover, #content .post_top a:hover, 
@@ -48,8 +50,8 @@ a:hover.b_askquestions, #content .alphabetical li a:hover,
 
 
 /* STRUCTURE ---------------------*/
-#top_strip { background:#131313; }
-#header { background:#1f1f1f; }
+#top_strip { background:#333; }
+#header { background:#f1f1f1; }
 #nav { border-bottom:1px solid #e5e5e5; }
 #footer {  height:100%; overflow:hidden;   }
 

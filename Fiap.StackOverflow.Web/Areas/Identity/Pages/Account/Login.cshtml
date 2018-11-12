@@ -5,51 +5,54 @@
     ViewData["Title"] = "Log in";
 }
 
-<h2>@ViewData["Title"]</h2>
-<div class="row">
-    <div class="col-md-4">
-        <section>
-            <form method="post">
-                <h4>Use a local account to log in.</h4>
-                <hr />
-                <div asp-validation-summary="All" class="text-danger"></div>
-                <div class="form-group">
-                    <label asp-for="Input.Email"></label>
-                    <input asp-for="Input.Email" class="form-control" />
-                    <span asp-validation-for="Input.Email" class="text-danger"></span>
+<div class="container-fluid">
+    <div id="wrapper">
+        <div id="content">
+
+            <h1 class="page_head">@ViewData["Title"]</h1>
+            <div class="breadcrumbs"></div>
+
+            <div class="login_form">
+                <div class="login_content">
+                    @*<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Praesent aliquam,  justo convallis luctus rutrum, erat nulla fermentum diam, at nonummy quam  ante ac quam. Maecenas urna purus, fermentum id, molestie in, commodo  porttitor, felis. Nam blandit quam ut lacus.</p>*@
                 </div>
-                <div class="form-group">
-                    <label asp-for="Input.Password"></label>
-                    <input asp-for="Input.Password" class="form-control" />
-                    <span asp-validation-for="Input.Password" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <div class="checkbox">
-                        <label asp-for="Input.RememberMe">
-                            <input asp-for="Input.RememberMe" />
-                            @Html.DisplayNameFor(m => m.Input.RememberMe)
-                        </label>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <button type="submit" class="btn btn-default">Log in</button>
-                </div>
-                <div class="form-group">
-                    <p>
+
+                <div class="login_form_box">
+                    
+
+
+                    <form method="post">
+                        <div class="form_row clearfix">
+                            <label asp-for="Input.Email"></label>
+                            <input asp-for="Input.Email" class="textfield" size="20" />
+                            <span asp-validation-for="Input.Email" class="alert-danger text-nowrap"></span>
+                        </div>
+                        <div class="form_row clearfix">
+                            <label asp-for="Input.Password"></label>
+                            <input asp-for="Input.Password" class="textfield" size="20" />
+                            <span asp-validation-for="Input.Password" class="alert-danger text-nowrap"></span>
+                        </div>
+                        <p class="rember">
+                            <label asp-for="Input.RememberMe">
+                                <input asp-for="Input.RememberMe" />
+                                @Html.DisplayNameFor(m => m.Input.RememberMe)
+                            </label>
+                        </p>
+
+                        <input class="btn_input_highlight btn_spacer" type="submit" value="Log In" name="submit">
                         <a asp-page="./ForgotPassword">Esqueceu a senha?</a>
-                    </p>
-                    <p>
-                        <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Novo cadastro</a>
-                    </p>
+                        <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">
+                            Novo cadastro
+                        </a>
+                    </form>
+
                 </div>
-            </form>
-        </section>
-    </div>
-    <div class="col-md-6 col-md-offset-2">
-        
+
+            </div>
+        </div>
     </div>
 </div>
 
-@section Scripts {
-    <partial name="_ValidationScriptsPartial" />
-}
+    @section Scripts {
+        <partial name="_ValidationScriptsPartial" />
+    }

@@ -158,7 +158,7 @@ span.comm-reply, span.comm-reply a, .content_left p span { color:#999; }
 #top_strip p a { padding:0 4px; color:#fff; }
 #top_strip p a:hover { color:#525252; }
 
-.logo { float:left; margin:35px 0; }
+.logo { float:left; margin:10px 0; }
 .header_right { float:right; margin-top:16px; width:468px;   }
 
 .blog-title a { font-size:30px; padding:0; margin:0; }
