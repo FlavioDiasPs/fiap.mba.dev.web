@@ -46,12 +46,12 @@
 
                 <h3> <a href="what-is-worpress/index.html" rel="bookmark" title="Permanent Link to What is worpress">@Html.ActionLink(item.Title, "Details", new { id = item.Id })</a></h3>
                 <p>
-                    <span class="user">Pergunta por: <strong><a href="author/sd%2cjns-jv/index.html" title="Posts by sd,jns jv" rel="author">@Html.DisplayFor(modelItem => item.Author)</a></strong> </span>
+                    <span class="user">Por: <strong><a href="author/sd%2cjns-jv/index.html" title="Posts by sd,jns jv" rel="author">@Html.DisplayFor(modelItem => item.Author)</a></strong> </span>
                     <span class="views"><b>221 </b> views </span>
                     <span class="ptags">
-                        @foreach (var tag in item.Tags)
+                        @foreach (var tag in item.QuestionTags)
                         {
-                            var text = tag + " ";
+                            var text = $"[{tag.Tag?.Value}]";
                             <a href="#" rel="tag">
                                 @Html.DisplayFor(tagItem => text)
                             </a>

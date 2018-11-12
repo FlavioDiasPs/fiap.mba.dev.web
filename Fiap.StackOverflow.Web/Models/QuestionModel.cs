@@ -12,7 +12,7 @@ namespace Fiap.StackOverflow.Web.Models
     {
         public QuestionModel()
         {
-            Tags = new List<string>() { "C#", "JAVA", "RenatoGay"};
+            Tags = new List<TagModel>();
             Authors = new List<SelectListItem>();
             Categories = new List<SelectListItem>();
             Vote = 10;
@@ -40,29 +40,17 @@ namespace Fiap.StackOverflow.Web.Models
 
         [Required(ErrorMessage = "Preencher campo Description"), MaxLength(256)]
         public string Description { get; set; }
-
-        public List<string> Tags { get; set; }
-        public List<SelectListItem> Authors { get; set; }
         public int Vote { get; set; }
 
+        public string SelectedTags { get; set; }
+        public List<QuestionTagModel> QuestionTags { get; set; }
+        public List<TagModel> Tags { get; set; }
+        public List<SelectListItem> Authors { get; set; }
         public List<SelectListItem> Categories { get; set; }
         public List<AnswerModel> Answers { get; set; }
 
         public int Views { get; set; }
 
         public string Category { get; set; }
-
-        public static explicit operator QuestionModel(Question question)
-        {
-            return new QuestionModel()
-            {
-                Author = question.Author.Name,
-                AuthorId = question.AuthorId,
-                Description = question.Description,
-                Id = question.Id,
-                Title = question.Title,
-                Views = question.ViewCount                
-            };
-        }
     }
 }

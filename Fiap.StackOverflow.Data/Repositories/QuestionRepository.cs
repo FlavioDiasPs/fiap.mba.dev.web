@@ -19,15 +19,20 @@ namespace Fiap.StackOverflow.Infra.Data.Repositories
         {
             return _context.Questions
                 .Include(x => x.Author)
-                //.Include(x => x.Answers)
-                //.Include(x => x.Answers.Select(y => y.Author))
+                .Include(x => x.Answers)
+                .Include("Answers.Author")
+                .Include(x => x.QuestionTags)
+                .Include("QuestionTags.Tag")
                 .FirstOrDefault(x => x.Id == id);
         }
         public IQueryable<Question> GetQuestions()
         {
             return _context.Questions
-                        .Include(x => x.Answers)
-                        .Include(x => x.Author);
+                .Include(x => x.Author)
+                .Include(x => x.Answers)
+                .Include("Answers.Author")
+                .Include(x => x.QuestionTags)
+                .Include("QuestionTags.Tag");
         }
     }
 }

@@ -26,7 +26,7 @@ namespace Fiap.StackOverflow.Core.Entities
         public int CategoryId { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
-        //public List<string> Tags { get; set; }
+        public List<QuestionTag> QuestionTags { get; set; }
         public List<Answer> Answers{ get; set; }
         public int ViewCount { get; set; }
     }

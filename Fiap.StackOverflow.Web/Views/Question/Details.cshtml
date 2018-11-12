@@ -19,9 +19,9 @@
                         <span class="user">Asked by: <strong><a href="../author/sd%2cjns-jv/index.html" title="Posts by sd,jns jv" rel="author">@Model.Author</a></strong> </span>
                         <span class="views"><b>@Model.Views</b> views</span>
                         <span class="ptags">
-                            @foreach (var tag in Model.Tags)
+                            @foreach (var tag in Model.QuestionTags)
                             {
-                                var text = tag + " ";
+                                var text = $"[{tag.Tag?.Value}]";
                                 <a href="#" rel="tag">
                                     @Html.DisplayFor(tagItem => text)
                                 </a>
@@ -41,12 +41,14 @@
             <ol class="commentlist" style="margin-bottom: 0px;">
                 <li class="comment wrap threaded clearfix  " id="comment-37">
                     <div class="votes">
-                        <p><span id="karma-37-total" class="bnone">0 <b>Votes</b></span> <img style="padding: 0px; border: none; cursor: pointer;" class="up-thumb" id="up-37" src="https://demo.templatic.com/answers/wp-content/themes/Answers/images/2_14_up.png" alt="Thumb up" onclick="javascript:ckratingKarma('37', 'add', 'https://demo.templatic.com/answers/?ptype=crating', '2_14_');" title=""> <span id="karma-37-up" style=";" class="up_points">0 <b>Votes</b></span>&nbsp;<img style="padding: 0px; border: none; cursor: pointer;" class="down-thumb" id="down-37" src="https://demo.templatic.com/answers/wp-content/themes/Answers/images/2_14_down.png" alt="Thumb down" onclick="javascript:ckratingKarma('37', 'subtract', 'https://demo.templatic.com/answers/?ptype=crating', '2_14_')" title=""> <span id="karma-37-down" style=";" class="down_points">0 <b>Votes</b></span></p>
+                        <p>
+                            <span id="karma-37-total" class="bnone">0 <b>Votes</b></span> <img style="padding: 0px; border: none; cursor: pointer;" class="up-thumb" id="up-37" src="~/images/2_14_up.png" alt="Thumb up" onclick="javascript:ckratingKarma('37', 'add', 'https://demo.templatic.com/answers/?ptype=crating', '2_14_');" title=""> <span id="karma-37-up" style=";" class="up_points">0 <b>Votes</b></span>&nbsp;<img style="padding: 0px; border: none; cursor: pointer;" class="down-thumb" id="down-37" src="https://demo.templatic.com/answers/wp-content/themes/Answers/images/2_14_down.png" alt="Thumb down" onclick="javascript:ckratingKarma('37', 'subtract', 'https://demo.templatic.com/answers/?ptype=crating', '2_14_')" title=""> <span id="karma-37-down" style=";" class="down_points">0 <b>Votes</b></span>
+                        </p>
                     </div>
                     <div class="content_left">
                         <p>it sounds to me like you were hungry too, a similar thing happened to me </p>
                         <p class="author">
-                            <img name="user_photo" class="agent_photo" id="user_photo" src="https://demo.templatic.com/answers/wp-content/themes/Answers/images/avatar_post.png" width="38" height="38">
+                            <img name="user_photo" class="agent_photo" id="user_photo" src="~/images/avatar_post.png" width="38" height="38">
                             <span class="auhtor_name">
                                 <strong>
                                     <a href="https://demo.templatic.com/answers/author/satyajit/">scott</a>

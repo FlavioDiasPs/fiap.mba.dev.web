@@ -13,9 +13,14 @@ namespace Fiap.StackOverflow.Web.Mapping
         protected AutoMapperProfileConfiguration(string profileName)
         : base(profileName)
         {
-            CreateMap<QuestionModel, Question>().ReverseMap()
-                    .ForMember(dest => dest.Author, opt => opt.MapFrom(src => src.Author != null ? src.Author.Name : string.Empty));
-            CreateMap<CategoryModel, Category>().ReverseMap();
+            CreateMap<Question, QuestionModel>()
+                    .ForMember(dest => dest.Author, opt => opt.MapFrom(src => src.Author != null ? src.Author.Name : string.Empty))
+                    .ForMember(dest => dest.QuestionTags, opt => opt.MapFrom(src => src.QuestionTags))
+                    .ReverseMap();
+            CreateMap<Category, CategoryModel>().ReverseMap();
+            CreateMap<Tag, TagModel>()
+                    .ForMember(dest => dest.Value, opt => opt.MapFrom(src => src.Name))
+                    .ReverseMap();
         }
     }
 }

@@ -30,7 +30,12 @@ namespace Fiap.StackOverflow.Infra.Data.EntityFramework.Map
                 .WithOne(s => s.Question)
                 .HasForeignKey(s => s.QuestionId)
                 .OnDelete(DeleteBehavior.Restrict);
-                       
+
+            builder.HasMany(g => g.QuestionTags)
+                .WithOne(s => s.Question)
+                .HasForeignKey(s => s.QuestionId)
+                .OnDelete(DeleteBehavior.Restrict);
+
         }
     }
 }

@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Fiap.StackOverflow.Infra.Data.IdentityExtension;
 using System.Security.Claims;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace Fiap.StackOverflow.Web.Controllers
 {
@@ -25,28 +26,24 @@ namespace Fiap.StackOverflow.Web.Controllers
         private readonly IAuthorService _authorService;
         private readonly IMapper _mapper;
         private readonly ICategoryService _categoryService;
+        private readonly ITagService _tagService;
+        private readonly IQuestionTagService _questionTagService;
 
-        public QuestionController(IMapper mapper, IUnitOfWork unitOfWork, IQuestionService questionService, IAuthorService authorService, ICategoryService categoryService) : base(unitOfWork)
+        public QuestionController(IMapper mapper, IUnitOfWork unitOfWork, IQuestionService questionService, IAuthorService authorService, ICategoryService categoryService, ITagService tagService, IQuestionTagService questionTagService) : base(unitOfWork)
         {
             _questionService = questionService;
             _unitOfWork = unitOfWork;
             _authorService = authorService;
             _mapper = mapper;
             _categoryService = categoryService;
+            _tagService = tagService;
+            _questionTagService = questionTagService;
         }
         public ActionResult Index()
         {
-            var questions = _questionService.GetQuestions().Select(x => new QuestionModel()
-            {
-                Id = x.Id,
-                Title = x.Title,
-                Description = x.Description,
-                AuthorId = x.AuthorId,
-                //Author = x.Author.Name
-                //Tags = x.Tags
-            }).ToList();
+            var questions = _questionService.GetQuestions().Select(x => _mapper.Map<QuestionModel>(x)).ToList();
 
-            var vm = new QuestionViewModel{ Questions = questions };
+            var vm = new QuestionViewModel { Questions = questions };
 
             return View(vm);
         }
@@ -59,37 +56,22 @@ namespace Fiap.StackOverflow.Web.Controllers
                                             .Take(5)
                                             .Select(x => new KeyValuePair<int, string>(x.Id, x.Title))
                                             .ToList();
-
-            return View(_mapper.Map<QuestionModel>(question));
+            var m = _mapper.Map<QuestionModel>(question);
+            return View(m);
         }
         [Authorize]
         public ActionResult Create()
         {
             var m = new QuestionModel();
-            
+
             LoadCreate(m);
 
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var author = _authorService.GetByIdentityId(userId);
-            if(author == null)
-            {
-                author = new Author(User.Identity.Name ,userId);
-                try
-                {
-                    _authorService.Add(author);
-                }
-                catch (Exception e)
-                {
-                    throw;
-                }
-            }
-            m.AuthorId = author.Id;
             return View(m);
         }
 
-        [HttpPost]
+        [HttpPost] 
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind("AuthorId,CategoryId,Title,Description")] QuestionModel questionModel)
+        public ActionResult Create([Bind("CategoryId,Title,Description,SelectedTags")] QuestionModel questionModel)
         {
             var m = new QuestionModel();
             LoadCreate(m);
@@ -98,11 +80,29 @@ namespace Fiap.StackOverflow.Web.Controllers
             {
                 try
                 {
-                    var question = new Question(questionModel.AuthorId, questionModel.CategoryId, questionModel.Title, questionModel.Description);
-
                     _unitOfWork.BeginTransactionAnsyc();
 
+                    var question = new Question(AuthorVerify().Id, questionModel.CategoryId, questionModel.Title, questionModel.Description);
+
                     _questionService.Add(question);
+
+                    var questionTags = new List<QuestionTag>();
+
+                    foreach (var tag in JsonConvert.DeserializeObject<List<TagModel>>(questionModel.SelectedTags))
+                    {
+                        if (tag.Id.HasValue)
+                        {
+                            questionTags.Add(new QuestionTag() { QuestionId = question.Id, TagId = (int)tag.Id });
+                        }
+                        else
+                        {
+                            var newTag = new Tag() { Name = tag.Value };
+                            _tagService.Add(newTag);
+                            questionTags.Add(new QuestionTag() { QuestionId = question.Id, TagId = newTag.Id });
+                        }
+                    }
+
+                    question.QuestionTags = questionTags;
 
                     _unitOfWork.SaveChanges();
                     _unitOfWork.Commit();
@@ -120,18 +120,36 @@ namespace Fiap.StackOverflow.Web.Controllers
                 return View(m);
             }
         }
+
+        private Author AuthorVerify()
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var author = _authorService.GetByIdentityId(userId);
+            if (author == null)
+            {
+                try
+                {
+                    author = new Author(User.Identity.Name, userId);
+                    _authorService.Add(author);
+                }
+                catch (Exception e)
+                {
+                    throw;
+                }
+
+            }
+            return author;
+        }
         private QuestionModel LoadCreate(QuestionModel questionModel)
         {
-            questionModel.Categories = _categoryService.GetAll().Select(x => new SelectListItem()
-             {
-                 Value = x.Id.ToString(),
-                 Text = x.Name.ToString()
-             }).ToList();
+            questionModel.Categories = _categoryService.GetAll().Select(x => new SelectListItem() { Value = x.Id.ToString(), Text = x.Name.ToString() }).ToList();
+            questionModel.Tags = _tagService.GetAll().Select(x => _mapper.Map<TagModel>(x)).ToList();
+
             return questionModel;
         }
         public ActionResult Edit(int id)
         {
-            var model = (QuestionModel)_questionService.GetCompleteById(id);
+            var model = _mapper.Map<QuestionModel>(_questionService.GetCompleteById(id));// (QuestionModel)_questionService.GetCompleteById(id);
             return View(model);
         }
 
@@ -142,33 +160,33 @@ namespace Fiap.StackOverflow.Web.Controllers
             //Adicionada o filter no mvc em startup pra não precisar validar model
             //if (ModelState.IsValid)
             //{
-                var question = _questionService.GetById(id);
+            var question = _questionService.GetById(id);
 
-                try
-                {
-                    _unitOfWork.BeginTransactionAnsyc();
+            try
+            {
+                _unitOfWork.BeginTransactionAnsyc();
 
-                    question.Title = questionModel.Title;
-                    question.Description = questionModel.Description;
+                question.Title = questionModel.Title;
+                question.Description = questionModel.Description;
 
-                    _questionService.Update(question);
+                _questionService.Update(question);
 
-                    _unitOfWork.Commit();
+                _unitOfWork.Commit();
 
-                    return RedirectToAction(nameof(Index));
-                }
-                catch
-                {
-                    _unitOfWork.RollbackTransaction();
-                    return View();
-                }
+                return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                _unitOfWork.RollbackTransaction();
+                return View();
+            }
             //}
             //return View();
         }
 
         public ActionResult Delete(int id)
         {
-            var question = (QuestionModel)_questionService.GetCompleteById(id);
+            var question = _mapper.Map<QuestionModel>(_questionService.GetCompleteById(id));
             return View(question);
         }
 

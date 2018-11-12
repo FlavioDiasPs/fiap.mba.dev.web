@@ -27,6 +27,8 @@ namespace Fiap.StackOverflow.Infra.Data.EntityFramework
             modelBuilder.ApplyConfiguration(new MapQuestion());
             modelBuilder.ApplyConfiguration(new MapAnswser());
             modelBuilder.ApplyConfiguration(new MapCategory());
+            modelBuilder.ApplyConfiguration(new MapTag());
+            modelBuilder.ApplyConfiguration(new MapQuestionTag());
             foreach (var property in modelBuilder.Model.GetEntityTypes()
                 .SelectMany(t => t.GetProperties())
                 .Where(p => p.ClrType == typeof(string)))

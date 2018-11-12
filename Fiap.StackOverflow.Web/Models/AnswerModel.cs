@@ -13,11 +13,6 @@ namespace Fiap.StackOverflow.Web.Models
             Description = description;
             QuestionId = questionId;
         }
-
-        protected AnswerModel()
-        {
-
-        }
         public int Votes { get; set; }
         public int AuthorId { get; set; }
         public string Description { get; set; }

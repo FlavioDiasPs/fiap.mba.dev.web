@@ -16,6 +16,7 @@
     <Compile Remove="Migrations\20181107041753_Setup.cs" />
     <Compile Remove="Migrations\20181110011051_setup.cs" />
     <Compile Remove="Migrations\20181110172520_categories.cs" />
+    <Compile Remove="Migrations\20181112024712_questiontag.cs" />
   </ItemGroup>
 
   <ItemGroup>

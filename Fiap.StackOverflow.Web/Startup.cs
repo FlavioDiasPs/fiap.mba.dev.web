@@ -59,13 +59,19 @@ namespace Fiap.StackOverflow.Web
             serviceCollection.AddTransient<IUnitOfWork, UnitOfWork>();
 
             serviceCollection.AddTransient<IQuestionService, QuestionService>();
+            serviceCollection.AddTransient<ICategoryService, CategoryService>();
+            serviceCollection.AddTransient<ITagService, TagService>();
+            serviceCollection.AddTransient<IQuestionTagService, QuestionTagService>();
             serviceCollection.AddTransient<IAuthorService, AuthorService>();
             serviceCollection.AddTransient<IAnswerService, AnswerService>();
 
-            serviceCollection.AddTransient<IAuthorRepository, AuthorRepository>();
             serviceCollection.AddTransient<IQuestionRepository, QuestionRepository>();
+            serviceCollection.AddTransient<ICategoryRepository, CategoryRepository>();
+            serviceCollection.AddTransient<ITagRepository, TagRepository>();
+            serviceCollection.AddTransient<IQuestionTagRepository, QuestionTagRepository>();
+            serviceCollection.AddTransient<IAuthorRepository, AuthorRepository>();
             serviceCollection.AddTransient<IAnswerRepository, AnswerRepository>();
-            
+
             serviceCollection.AddMvc(options =>
             {
                 //Faz com que seja desnecessário validar o model em toda ação
@@ -79,10 +85,10 @@ namespace Fiap.StackOverflow.Web
             ConnectionString = Configuration["ConnectionStrings:DefaultConnection"];
 
             if (hostingEnvironment.IsDevelopment())
-                applicationBuilder.UseDeveloperExceptionPage();
-            
-            applicationBuilder.UseHttpsRedirection();
-            applicationBuilder.UseStaticFiles();
+                app.UseDeveloperExceptionPage();
+
+            app.UseHttpsRedirection();
+            app.UseStaticFiles();
 
             app.UseAuthentication();
 

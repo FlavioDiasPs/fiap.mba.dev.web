@@ -9,7 +9,7 @@
 
 <hr />
 <div class="row">
-    <div class="col-md-4">        
+    <div class="col-md-4">
         <form asp-action="Create">
             <input type="hidden" asp-for="AuthorId" class="form-control" />
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -30,7 +30,9 @@
             </div>
             <div class="form-group">
                 <label asp-for="Tags" class="control-label"></label>
-                <input asp-for="Author" class="form-control" asp-items="Model.Tags" />
+                @*<select asp-for="Tags" class="form-control" asp-items="Model.Tags"> </select>*@
+                <input  type="hidden" />
+                <textarea asp-for="SelectedTags" ></textarea>
                 <span asp-validation-for="Tags" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -43,10 +45,57 @@
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
+<script src="~/lib/tagify/dist/jQuery.tagify.min.js"></script>
+<script src="~/lib/tagify/dist/tagify.js"></script>
+<script data-name="textarea">
+    (function () {
+        var input = document.querySelector('textarea[id=SelectedTags]'),
+            tagify = new Tagify(input, {
+                //enforceWhitelist: true,
+                whitelist: [
 
-<script>
-    $("#tagInput").keyup(function () {
-        $("#tagInput").val($("#tagInput").val().replace(" ", ""));
-    });
+                @{
+                    foreach (var item in Model.Tags)
+                    {
+                        @Html.Raw("{ value: '"+item.Value+"', id: '" +item.Id.ToString()+ "'},");
+                    }
+                }
+                ],
+                callbacks: {
+                    add: console.log(),  // callback when adding a tag
+                    remove: console.log   // callback when removing a tag
+                }
+            });
+
+        //// Chainable event listeners
+        //tagify.on('add', onAddTag)
+        //    .on('remove', onRemoveTag)
+        //    .on('input', onInput)
+        //    .on('invalid', onInvalidTag);
+
+        //// tag added callback
+        //function onAddTag(e) {
+        //    console.log(e, e.detail);
+        //    console.log(tagify.DOM.originalInput.value);
+        //    console.log(tagify.DOM.originalInput);
+        //    console.log($("textarea[name=tags]").val())
+        //    //tagify.off('add', onAddTag) // exmaple of removing a custom Tagify event
+        //}
+
+        //// tag remvoed callback
+        //function onRemoveTag(e) {
+        //    console.log(e, e.detail);
+        //}
+
+        //// on character(s) added/removed (user is typing/deleting)
+        //function onInput(e) {
+        //    console.log(e, e.detail);
+        //}
+
+        //// invalid tag added callback
+        //function onInvalidTag(e) {
+        //    console.log(e, e.detail);
+        //}
+    })();
 </script>
 
