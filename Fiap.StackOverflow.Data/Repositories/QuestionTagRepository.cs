@@ -20,6 +20,7 @@ namespace Fiap.StackOverflow.Infra.Data.Repositories
         {
             return  _context.QuestionsTag
                 .Include(x => x.Question)
+                .Include("Question.Author")
                 .Where(x => x.TagId == id);
         }
     }

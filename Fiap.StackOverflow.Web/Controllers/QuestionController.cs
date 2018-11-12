@@ -50,8 +50,8 @@ namespace Fiap.StackOverflow.Web.Controllers
 
         public ActionResult QuestionsByTag(int id)
         {
-            var questions = _questionService.GetQuestionsByTagId(id).Select(x => _mapper.Map<QuestionModel>(x)).ToList();
-            
+            var questions = _questionTagService.GetQuestionsTagByTagId(id).Select(x => _mapper.Map<QuestionModel>(x.Question)).ToList();
+
             var vm = new QuestionViewModel { Questions = questions };
             vm.Tag = _tagService.GetById(id).Name;
 

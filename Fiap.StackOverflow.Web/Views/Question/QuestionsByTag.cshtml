@@ -6,7 +6,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Perguntas por Tag: @Model.Tag </h2>
+<h2>Perguntas por Tag: "<em style="color:red;font-style:italic;" >@Model.Tag</em> " </h2>
 
 
 @foreach (var item in Model.Questions.OrderByDescending(x => x.Id))
