@@ -17,49 +17,100 @@
     <link href="~/style.css" rel="stylesheet" />
     <link href="~/lib/tagify/dist/tagify.css" rel="stylesheet" />
 </head>
-<body class="archive category category-questions category-5"><div id="top_strip">
-    <div id="top_strip_in" class="clearfix">
-        <div id="topmenu" class="menu">
-            <div id="menu-button">Menu</div><div class="menu-top-nav-container">
-                <ul id="menu-top-nav" class="menu">
-                    @*<li id="menu-item-153" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-153"><a target="_blank" href="https://templatic.com/cms-themes/answers-wordpress-theme">Theme Features</a></li>
-                    <li id="menu-item-152" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-152"><a href="https://demo.templatic.com/answers/site-map/">Site Map</a></li>
-                    <li id="menu-item-151" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-151"><a href="https://demo.templatic.com/answers/archive-page/">Archive Page</a></li>*@
-                </ul>
-            </div>
-        </div>				<p>
+<body class="archive category category-questions category-5">
+    <div id="top_strip">
+        <div id="top_strip_in" class="clearfix">
+            <div id="topmenu" class="menu">
+                <div id="menu-button">Menu</div><div class="menu-top-nav-container">
+                    <ul id="menu-top-nav" class="menu">
+                        @*<li id="menu-item-153" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-153"><a target="_blank" href="https://templatic.com/cms-themes/answers-wordpress-theme">Theme Features</a></li>
+                            <li id="menu-item-152" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-152"><a href="https://demo.templatic.com/answers/site-map/">Site Map</a></li>
+                            <li id="menu-item-151" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-151"><a href="https://demo.templatic.com/answers/archive-page/">Archive Page</a></li>*@
+                    </ul>
+                </div>
+            </div>				<p>
 
-    <partial name="_LoginPartial" />
+                <partial name="_LoginPartial" />
 
 
 
-</p>
+            </p>
+        </div>
     </div>
-</div>
     <div id="header">
-    <div id="header_in" class="clearfix">
+        <div id="header_in" class="clearfix">
 
 
-        <div class="logo">
-            <a asp-area="" asp-controller="Question" asp-action="Index"><img src="~/images/questions-answers.png" alt="Answers"></a>
+            <div class="logo">
+                <a asp-area="" asp-controller="Question" asp-action="Index"><img src="~/images/questions-answers.png" alt="Answers"></a>
+            </div>
+
+
+
+            <div class="header_right">
+
+
+
+
+            </div>
+
+
         </div>
-
-
-
-        <div class="header_right">
-
-
-
-
-        </div>
-
-
     </div>
-</div>
     <partial name="_CookieConsentPartial" />
     <div class="container body-content">
         <hr />
-        @RenderBody()
+
+        <div class="container-fluid">
+            <div id="wrapper">
+
+                <div id="content" style="margin-bottom: 20px;">
+                    @RenderBody()
+                </div>
+
+                <div id="sidebar">
+
+                    <a href="@Url.Action("Create", "Question")" class="b_askquestions">Faça uma Pergunta</a>
+
+
+
+                    <div class="widget">
+                        <div class="textwidget"><a href="http://www.fiap.com.br" target="_blank"><img src="http://vtexday.vtex.com/wp-content/uploads/2018/02/FIAP-logo-.jpg" style="max-width:300px;"></a></div>
+                    </div>
+
+                    <div class="widget">
+                        <div class="latestnewshome">
+                            <h3>Últimas Perguntas</h3>
+                            @await Component.InvokeAsync("LastQuestions", new { quantity = 5 })
+                            <vc:lastquestions quantity="5"></vc:lastquestions>
+
+                            @*<ul>
+                                @foreach (var lastestAnswer in (List<KeyValuePair<int, string>>)ViewBag.LastestQuestions)
+                                {
+                                    <li class="clearfix">
+                                        <a class="widget-title" href="@Url.Action("Details", "Question", new { id = lastestAnswer.Key })">@lastestAnswer.Value
+                                    </li>
+
+                                }
+                            </ul>*@
+                        </div>
+                    </div>
+                    <div class="widget">
+                        <div class="testimonials">
+
+                            <h3>Depoimentos</h3>
+
+                            <blockquote>
+                                <p class="endquote">
+                                    Realmente, este grupo merece 10, um trabalho muito bem feito.
+                                </p>
+                            </blockquote>
+                            <cite>- Cabral, Igor</cite>
+                        </div>
+                    </div>
+                </div> <!-- sidebar #end -->
+            </div>
+        </div>
         <hr />
         <footer>
             <p>&copy; 2018 - FIAPOverflow</p>

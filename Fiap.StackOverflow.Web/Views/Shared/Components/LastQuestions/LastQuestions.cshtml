@@ -1,0 +1,9 @@
+﻿@model IEnumerable<QuestionModel>
+<ul>
+    @foreach (var question in Model)
+    {
+        <li class="clearfix">
+            <a class="widget-title" href="@Url.Action("Details", "Question", new { id = question.Id })">@question.Title
+        </li>
+    }
+</ul>

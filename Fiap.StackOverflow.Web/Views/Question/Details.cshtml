@@ -5,9 +5,6 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="container-fluid">
-    <div id="wrapper">
-        <div id="content" style="margin-bottom: 20px;">
             <div class="posts" style="margin-bottom: 50px;">
                 <div class="question_list">
                     <span class="answers_total">
@@ -117,48 +114,8 @@
                     </div>
                 }
                 <div class="fix"></div>
-            </div>
-        </div> <!-- content #end -->
-        <div id="sidebar">
-
-            <a href="@Url.Action("Create", "Question")" class="b_askquestions">Faça uma Pergunta</a>
-
-
-
-            <div class="widget">
-                <div class="textwidget"><a href="http://www.fiap.com.br" target="_blank"><img src="http://vtexday.vtex.com/wp-content/uploads/2018/02/FIAP-logo-.jpg" style="max-width:300px;"></a></div>
-            </div>
-
-            <div class="widget">
-                <div class="latestnewshome">
-                    <h3>Últimas Perguntas</h3> <ul>
-    @foreach (var lastestAnswer in (List<KeyValuePair<int, string>>)ViewBag.LastestQuestions)
-    {
-        <li class="clearfix">
-            <a class="widget-title" href="@Url.Action("Details", "Question", new { id = lastestAnswer.Key })">@lastestAnswer.Value
-        </li>
-
-    }    
-</ul>
-                </div>
-            </div>
-            <div class="widget">
-                <div class="testimonials">
-
-                    <h3>Depoimentos</h3>
-
-                    <blockquote>
-                        <p class="endquote">
-                            Realmente, este grupo merece 10, um trabalho muito bem feito.
-                        </p>
-                    </blockquote>
-                    <cite>- Cabral, Igor</cite>         
-                </div>
-            </div>                          
-         </div> <!-- sidebar #end -->
-    </div>
-
-</div>
+            </div> <!-- content #end -->
+    
 
 @section scripts{
     <script type="text/javascript">

@@ -44,6 +44,11 @@ namespace Fiap.StackOverflow.Core.Services
             return _repository.GetQuestions();
         }
 
+        public IEnumerable<Question> GetLastQuestions(int quantity)
+        {
+            return _repository.GetLastQuestions(quantity);
+        }
+
         public void Remove(Question obj)
         {
             _repository.Remove(obj);

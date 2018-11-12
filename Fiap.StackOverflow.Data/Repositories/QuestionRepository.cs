@@ -50,5 +50,17 @@ namespace Fiap.StackOverflow.Infra.Data.Repositories
                 .Include(x => x.QuestionTags)
                 .Include("QuestionTags.Tag");
         }
+        public IQueryable<Question> GetLastQuestions(int quantity)
+        {
+            return _context.Questions
+                .Take(quantity)
+                .Include(x => x.Author)
+                .Include(x => x.Category)
+                .Include(x => x.Answers)
+                .Include("Answers.Author")
+                .Include(x => x.QuestionTags)
+                .Include("QuestionTags.Tag")
+                .OrderByDescending(x => x.Id);
+        }
     }
 }
