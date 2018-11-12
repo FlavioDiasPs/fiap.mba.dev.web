@@ -56,9 +56,9 @@ namespace Fiap.StackOverflow.Web.Controllers
                                             .Take(5)
                                             .Select(x => new KeyValuePair<int, string>(x.Id, x.Title))
                                             .ToList();
-            if (User.Identity.IsAuthenticated)            
-                ViewBag.AuthorId = _authorService.GetByIdentityId(User.FindFirstValue(ClaimTypes.NameIdentifier)).Id;            
-            else            
+            if (User.Identity.IsAuthenticated)
+                ViewBag.AuthorId = AuthorVerify().Id;
+            else
                 ViewBag.NaoLogado = true;
             
 
