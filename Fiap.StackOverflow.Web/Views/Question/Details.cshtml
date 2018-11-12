@@ -16,8 +16,8 @@
 
                     <h1>@Html.DisplayFor(model => model.Title)</h1>
                     <p>
-                        <span class="user">Asked by: <strong><a href="../author/sd%2cjns-jv/index.html" title="Posts by sd,jns jv" rel="author">@Model.Author</a></strong> </span>
-                        <span class="views"><b>@Model.Views</b> views</span>
+                        <span class="user">Perguntado por: <strong><a href="../author/sd%2cjns-jv/index.html" title="Posts by sd,jns jv" rel="author">@Model.Author</a></strong> </span>
+                        <span class="views"><b>@Model.Views</b> visualizações</span>
                         <span class="ptags">
                             @foreach (var tag in Model.QuestionTags)
                             {
@@ -39,36 +39,32 @@
             </div>
             <h2 style="margin-bottom: 20px;">Respostas:</h2>
             <ol class="commentlist" style="margin-bottom: 0px;">
-                <li class="comment wrap threaded clearfix  " id="comment-37">
-                    <div class="votes">
-                        <p>
-                            <span id="karma-37-total" class="bnone">0 <b>Votes</b></span> <img style="padding: 0px; border: none; cursor: pointer;" class="up-thumb" id="up-37" src="~/images/2_14_up.png" alt="Thumb up" onclick="javascript:ckratingKarma('37', 'add', 'https://demo.templatic.com/answers/?ptype=crating', '2_14_');" title=""> <span id="karma-37-up" style=";" class="up_points">0 <b>Votes</b></span>&nbsp;<img style="padding: 0px; border: none; cursor: pointer;" class="down-thumb" id="down-37" src="https://demo.templatic.com/answers/wp-content/themes/Answers/images/2_14_down.png" alt="Thumb down" onclick="javascript:ckratingKarma('37', 'subtract', 'https://demo.templatic.com/answers/?ptype=crating', '2_14_')" title=""> <span id="karma-37-down" style=";" class="down_points">0 <b>Votes</b></span>
-                        </p>
-                    </div>
-                    <div class="content_left">
-                        <p>it sounds to me like you were hungry too, a similar thing happened to me </p>
-                        <p class="author">
-                            <img name="user_photo" class="agent_photo" id="user_photo" src="~/images/avatar_post.png" width="38" height="38">
-                            <span class="auhtor_name">
-                                <strong>
-                                    <a href="https://demo.templatic.com/answers/author/satyajit/">scott</a>
-                                </strong>  <small>- Apr 01, 2018 </small>
-                            </span>
-                            <span class="comments_links">
-                                |
-
-                            </span>
-                        </p>
-                    </div>
-
-
-                    <span class="comm-reply">
-                    </span>
-                </li><!-- #comment-## -->
                 @foreach (var answer in Model.Answers)
                 {
+                    <li class="comment wrap threaded clearfix  " id="comment-37">
+                        <div class="votes">
+                            <p><span id="resposta-0" class="bnone">@answer.Votes</span> <img style="padding: 0px; border: none; cursor: pointer;" class="up-thumb" id="up-37" src="https://demo.templatic.com/answers/wp-content/themes/Answers/images/2_14_up.png" alt="Thumb up" onclick="likeAnswer('@answer.Id');" title=""> <span id="karma-37-up" style=";" class="up_points">0 <b>Votes</b></span>&nbsp;<img style="padding: 0px; border: none; cursor: pointer;" class="down-thumb" id="down-37" src="https://demo.templatic.com/answers/wp-content/themes/Answers/images/2_14_down.png" alt="Thumb down" onclick="unlikeAnswer('@answer.Id')" title=""> <span id="karma-37-down" style=";" class="down_points">0 <b>Votes</b></span></p>
+                        </div>
+                        <div class="content_left">
+                            <p>@answer.Description</p>
+                            <p class="author">
+                                <img name="user_photo" class="agent_photo" id="user_photo" src="https://demo.templatic.com/answers/wp-content/themes/Answers/images/avatar_post.png" width="38" height="38">
+                                <span class="auhtor_name">
+                                    <strong>
+                                        <a href="https://demo.templatic.com/answers/author/satyajit/">scott</a>
+                                    </strong>  <small>- Apr 01, 2018 </small>
+                                </span>
+                                <span class="comments_links">
+                                    |
+
+                                </span>
+                            </p>
+                        </div>
 
 
+                        <span class="comm-reply">
+                        </span>
+                    </li><!-- #comment-## -->
                 }
             </ol>
 
@@ -81,7 +77,7 @@
                 </div>
 
 
-                <form action="https://demo.templatic.com/answers/?ptype=add_comments" method="post" id="commentform">
+                <form action="" method="post" id="commentform">
                     <input type="hidden" name="referer" id="referer" class="textfield2" value="https://demo.templatic.com/answers/wordpress-themes-club/">
                     <p class="clearfix">
                         <label> Sua resposta</label>
@@ -133,7 +129,7 @@
                         </p>
                     </div>
                     *@
-                    <script type="text/javascript" src="https://demo.templatic.com/answers/wp-content/themes/Answers/library/js/question_validation.js"></script>
+                    @*<script type="text/javascript" src="https://demo.templatic.com/answers/wp-content/themes/Answers/library/js/question_validation.js"></script>*@
                     <script language="javascript" type="text/javascript">
                     </script>
                     <div class="aleft">
@@ -186,7 +182,7 @@
 
             <div class="widget">
                 <div class="latestnewshome">
-                    <h3>Latest Questions</h3> <ul>
+                    <h3>Últimas Perguntas</h3> <ul>
     @foreach (var lastestAnswer in (List<KeyValuePair<int, string>>)ViewBag.LastestQuestions)
     {
         <li class="clearfix">
@@ -200,14 +196,14 @@
             <div class="widget">
                 <div class="testimonials">
 
-                    <h3>Testimonials</h3>
+                    <h3>Depoimentos</h3>
 
                     <blockquote>
                         <p class="endquote">
-                            erat nulla fermentum diam Praesent aliquam,  justo convallis luctus rutrum, erat nulla fermentum diam,
+                            Realmente, este grupo merece 10, um trabalho muito bem feito. Melhor grupo que vi na FIAP.
                         </p>
                     </blockquote>
-                    <cite>- Robbin</cite>
+                    <cite>- Rodolfo, prof.</cite>
 
 
                 </div>
@@ -256,3 +252,19 @@
     </div>
 
 </div>
+
+@section scripts{
+    <script type="text/javascript">
+        function likeAnswer(respostaId) {            
+            var valorAtual = $("#resposta-" + respostaId).html();
+            valorAtual++;            
+            $("#resposta-" + respostaId).html(valorAtual++);
+        }
+
+        function unlikeAnswer(respostaId) {
+            var valorAtual = $("#resposta-" + respostaId).html();
+            valorAtual--;
+            $("#resposta-" + respostaId).html(valorAtual++);
+        }
+    </script>
+}
