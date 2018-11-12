@@ -82,17 +82,6 @@
                         <div class="latestnewshome">
                             <h3>Últimas Perguntas</h3>
                             @await Component.InvokeAsync("LastQuestions", new { quantity = 5 })
-                            <vc:lastquestions quantity="5"></vc:lastquestions>
-
-                            @*<ul>
-                                @foreach (var lastestAnswer in (List<KeyValuePair<int, string>>)ViewBag.LastestQuestions)
-                                {
-                                    <li class="clearfix">
-                                        <a class="widget-title" href="@Url.Action("Details", "Question", new { id = lastestAnswer.Key })">@lastestAnswer.Value
-                                    </li>
-
-                                }
-                            </ul>*@
                         </div>
                     </div>
                     <div class="widget">

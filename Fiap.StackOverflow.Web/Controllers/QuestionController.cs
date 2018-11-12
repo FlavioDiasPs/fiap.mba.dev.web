@@ -51,11 +51,6 @@ namespace Fiap.StackOverflow.Web.Controllers
         public ActionResult Details(int id)
         {
             var question = _questionService.GetCompleteById(id);
-            ViewBag.LastestQuestions = _questionService.GetAll()
-                                            .OrderByDescending(x => x.Id)
-                                            .Take(5)
-                                            .Select(x => new KeyValuePair<int, string>(x.Id, x.Title))
-                                            .ToList();
             if (User.Identity.IsAuthenticated)
                 ViewBag.AuthorId = AuthorVerify().Id;
             else
