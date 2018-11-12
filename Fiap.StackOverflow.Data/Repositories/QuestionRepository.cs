@@ -34,7 +34,7 @@ namespace Fiap.StackOverflow.Infra.Data.Repositories
         public IQueryable<Question> GetAllComplete()
         {                                                      
             return _context.Questions
-                                .Include(x => x.Author)
+                .Include(x => x.Author)
                 .Include(x => x.Answers)
                 .Include(x => x.Category)
                 .Include("Answers.Author");
@@ -44,6 +44,7 @@ namespace Fiap.StackOverflow.Infra.Data.Repositories
         {
             return _context.Questions
                 .Include(x => x.Author)
+                .Include(x => x.Category)
                 .Include(x => x.Answers)
                 .Include("Answers.Author")
                 .Include(x => x.QuestionTags)

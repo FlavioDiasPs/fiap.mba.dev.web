@@ -16,8 +16,8 @@
 
                     <h1>@Html.DisplayFor(model => model.Title)</h1>
                     <p>
-                        <span class="user">Perguntado por: <strong><a href="../author/sd%2cjns-jv/index.html" title="Posts by sd,jns jv" rel="author">@Model.Author</a></strong> </span>
-                        <span class="views"><b>@Model.Views</b> visualizações</span>
+                        <span class="user">Por: <strong><a href="#" title="Posts by sd,jns jv" rel="author">@Model.Author.Name</a></strong> </span>
+                        <span class="views"><b>@Model.ViewCount</b> visualizações</span>
                         <span class="ptags">
                             @foreach (var tag in Model.QuestionTags)
                             {
@@ -28,7 +28,7 @@
                             }
                             <br>
                         </span>		<span class="pcate">
-                            <a href="../category/uncategorized/index.html" rel="category tag">@Model.Category</a>
+                            <a href="#" rel="category tag">@Model.Category.Name</a>
                         </span>
                     </p>
                 </div> <!-- question #end -->

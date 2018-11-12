@@ -15,6 +15,7 @@ namespace Fiap.StackOverflow.Web.Models
             QuestionId = questionId;
         }
         public int Votes { get; set; }
+        public AuthorModel Author { get; set; }
         public int AuthorId { get; set; }
         public string Description { get; set; }
         public int QuestionId { get; set; }

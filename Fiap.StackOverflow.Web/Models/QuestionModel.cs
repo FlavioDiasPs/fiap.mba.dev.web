@@ -10,26 +10,13 @@ namespace Fiap.StackOverflow.Web.Models
 {
     public class QuestionModel
     {
-        public QuestionModel()
-        {
-            Tags = new List<TagModel>();
-            Authors = new List<SelectListItem>();
-            Categories = new List<SelectListItem>();
-            Vote = 10;
-            Answers = new List<AnswerModel>()
-            {
-                new AnswerModel(1, "Description lala", 1),
-                new AnswerModel(2, "teu haha", 2)
-            };
-            Views = 99;
-            Category = "Net Core";
-        }
         public int Id { get; set; }
-        //public UserModel Author { get; set; }
         public AuthorModel Author { get; set; }
 
         [Required(ErrorMessage = "Preencher campo AuthorId")]        
         public int AuthorId { get; set; }
+
+        public Category Category { get; set; }
 
         [Required(ErrorMessage = "Preencher campo Categoria")]
         [Display(Name = "Categoria")]
@@ -53,6 +40,5 @@ namespace Fiap.StackOverflow.Web.Models
 
         public int ViewCount { get; set; }
 
-        public string Category { get; set; }
     }
 }

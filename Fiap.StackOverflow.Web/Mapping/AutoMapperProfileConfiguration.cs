@@ -14,7 +14,7 @@ namespace Fiap.StackOverflow.Web.Mapping
         : base(profileName)
         {
             CreateMap<Question, QuestionModel>()
-                    .ForMember(dest => dest.Author, opt => opt.MapFrom(src => src.Author != null ? src.Author.Name : string.Empty))
+                    //.ForMember(dest => dest.Author, opt => opt.MapFrom(src => src.Author != null ? src.Author.Name : string.Empty))
                     .ForMember(dest => dest.QuestionTags, opt => opt.MapFrom(src => src.QuestionTags))
                     .ReverseMap();
             CreateMap<Category, CategoryModel>().ReverseMap();
