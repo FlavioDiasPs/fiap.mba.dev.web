@@ -1,5 +1,6 @@
 ﻿using Fiap.StackOverflow.Core.Entities;
 using Fiap.StackOverflow.Core.Interfaces.Repositories.Base;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Fiap.StackOverflow.Core.Interfaces.Repositories
@@ -11,5 +12,6 @@ namespace Fiap.StackOverflow.Core.Interfaces.Repositories
         IQueryable<Question> GetAllComplete();
 
         IQueryable<Question> GetLastQuestions(int quantity);
+        IQueryable<Question> GetQuestionsByTagId(int tagId);
     }
 }

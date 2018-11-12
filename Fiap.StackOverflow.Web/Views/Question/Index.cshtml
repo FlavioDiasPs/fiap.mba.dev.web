@@ -24,7 +24,7 @@
                         @foreach (var tag in item.QuestionTags)
                         {
                             var text = $"[{tag.Tag?.Value}]";
-                            <a href="#" rel="tag">
+                            <a asp-action="QuestionsByTag" asp-controller="Question" asp-route-id="@tag.Tag.Id" rel="tag">
                                 @Html.DisplayFor(tagItem => text)
                             </a>
                         }
@@ -36,12 +36,4 @@
 
 
             </div>
-
-
-
-
-
-
-            <!-- question #end -->
         }
-        <!-- question #end -->

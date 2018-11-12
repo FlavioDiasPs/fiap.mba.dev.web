@@ -3,6 +3,7 @@ using Fiap.StackOverflow.Core.Interfaces.Repositories;
 using Fiap.StackOverflow.Core.Interfaces.Services;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Fiap.StackOverflow.Core.Services
 {
@@ -42,6 +43,10 @@ namespace Fiap.StackOverflow.Core.Services
         public IEnumerable<Question> GetQuestions()
         {
             return _repository.GetQuestions();
+        }
+        public IEnumerable<Question> GetQuestionsByTagId(int tagId)
+        {
+            return _repository.GetQuestionsByTagId(tagId);
         }
 
         public IEnumerable<Question> GetLastQuestions(int quantity)

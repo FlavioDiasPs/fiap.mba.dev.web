@@ -62,5 +62,16 @@ namespace Fiap.StackOverflow.Infra.Data.Repositories
                 .Include("QuestionTags.Tag")
                 .OrderByDescending(x => x.Id);
         }
+        public IQueryable<Question> GetQuestionsByTagId(int tagId)
+        {
+            return _context.QuestionsTag
+                .Where(qt => qt.TagId == tagId)
+                .Select(qt => qt.Question)
+                .Include("Question.Author")
+                .Include("Question.Category")
+                .Include("Question.Answers")
+                .Include("Question.Answers.Author")
+                .OrderByDescending(q => q.Id);
+        }
     }
 }

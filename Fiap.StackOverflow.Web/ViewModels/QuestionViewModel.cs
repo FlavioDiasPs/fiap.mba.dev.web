@@ -10,5 +10,7 @@ namespace Fiap.StackOverflow.Web.ViewModels
     {
         public QuestionModel Question { get; set; }
         public List<QuestionModel> Questions { get; set; }
+
+        public string Tag { get; set; }
     }
 }

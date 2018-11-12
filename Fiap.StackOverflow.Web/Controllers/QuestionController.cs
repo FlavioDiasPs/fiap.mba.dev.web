@@ -48,6 +48,15 @@ namespace Fiap.StackOverflow.Web.Controllers
             return View(vm);
         }
 
+        public ActionResult QuestionsByTag(int id)
+        {
+            var questions = _questionService.GetQuestionsByTagId(id).Select(x => _mapper.Map<QuestionModel>(x)).ToList();
+            
+            var vm = new QuestionViewModel { Questions = questions };
+            vm.Tag = _tagService.GetById(id).Name;
+
+            return View(vm);
+        }
         public ActionResult Details(int id)
         {
             var question = _questionService.GetCompleteById(id);

@@ -27,6 +27,11 @@ namespace Fiap.StackOverflow.Core.Services
             return _repository.GetById(id);
         }
 
+        public IEnumerable<QuestionTag> GetQuestionsTagByTagId(int id)
+        {
+            return _repository.GetQuestionsTagByTagId(id);
+        }
+
         public void Remove(QuestionTag obj)
         {
             _repository.Remove(obj);

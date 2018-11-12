@@ -19,6 +19,8 @@ namespace Fiap.StackOverflow.Infra.Data.EntityFramework
         public DbSet<Answer> Answers { get; set; }
         public DbSet<Author> Authors { get; set; }
         public DbSet<Category> Categories { get; set; }
+        public DbSet<QuestionTag> QuestionsTag { get; set; }
+        public DbSet<Tag> Tags { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

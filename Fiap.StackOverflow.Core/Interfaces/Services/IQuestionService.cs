@@ -12,5 +12,6 @@ namespace Fiap.StackOverflow.Core.Interfaces.Services
         Question GetCompleteById(int id);
         IEnumerable<Question> GetAllComplete();
         IEnumerable<Question> GetLastQuestions(int quantity);
+        IEnumerable<Question> GetQuestionsByTagId(int tagId);
     }
 }

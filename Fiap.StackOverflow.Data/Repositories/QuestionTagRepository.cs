@@ -1,7 +1,9 @@
-﻿using Fiap.StackOverflow.Core.Entities;
+﻿using System.Linq;
+using Fiap.StackOverflow.Core.Entities;
 using Fiap.StackOverflow.Core.Interfaces.Repositories;
 using Fiap.StackOverflow.Infra.Data.EntityFramework;
 using Fiap.StackOverflow.Infra.Data.Repositories.Base;
+using Microsoft.EntityFrameworkCore;
 
 namespace Fiap.StackOverflow.Infra.Data.Repositories
 {
@@ -14,5 +16,11 @@ namespace Fiap.StackOverflow.Infra.Data.Repositories
             _context = context;
         }
 
+        public IQueryable<QuestionTag> GetQuestionsTagByTagId(int id)
+        {
+            return  _context.QuestionsTag
+                .Include(x => x.Question)
+                .Where(x => x.TagId == id);
+        }
     }
 }
