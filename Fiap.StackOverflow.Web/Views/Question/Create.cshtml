@@ -28,6 +28,7 @@
                 <textarea asp-for="Description" rows="5" cols="40"></textarea>
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
+            
             <div class="form-group">
                 <label asp-for="Tags" class="control-label"></label>
                 @*<select asp-for="Tags" class="form-control" asp-items="Model.Tags"> </select>*@
@@ -35,15 +36,12 @@
                 <textarea asp-for="SelectedTags" ></textarea>
                 <span asp-validation-for="Tags" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Voltar</a>
 </div>
 <script src="~/lib/tagify/dist/jQuery.tagify.min.js"></script>
 <script src="~/lib/tagify/dist/tagify.js"></script>

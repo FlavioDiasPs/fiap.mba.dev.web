@@ -8,5 +8,6 @@ namespace Fiap.StackOverflow.Core.Interfaces.Repositories
     {
         IQueryable<Question> GetQuestions();
         Question GetCompleteById(int id);
+        IQueryable<Question> GetAllComplete();
     }
 }

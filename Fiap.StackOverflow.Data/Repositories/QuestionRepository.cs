@@ -17,14 +17,29 @@ namespace Fiap.StackOverflow.Infra.Data.Repositories
         }
         public Question GetCompleteById(int id)
         {
+            var question = GetById(id);
+            question.ViewCount++;
+            Update(question);
+
             return _context.Questions
                 .Include(x => x.Author)
                 .Include(x => x.Answers)
+                .Include(x => x.Category)
                 .Include("Answers.Author")
                 .Include(x => x.QuestionTags)
                 .Include("QuestionTags.Tag")
                 .FirstOrDefault(x => x.Id == id);
         }
+
+        public IQueryable<Question> GetAllComplete()
+        {                                                      
+            return _context.Questions
+                                .Include(x => x.Author)
+                .Include(x => x.Answers)
+                .Include(x => x.Category)
+                .Include("Answers.Author");
+        }
+
         public IQueryable<Question> GetQuestions()
         {
             return _context.Questions

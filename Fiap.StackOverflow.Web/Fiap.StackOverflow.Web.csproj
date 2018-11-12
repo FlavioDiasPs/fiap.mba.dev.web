@@ -31,6 +31,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Fiap.StackOverflow.Api\Fiap.StackOverflow.Api.csproj" />
     <ProjectReference Include="..\Fiap.StackOverflow.Core\Fiap.StackOverflow.Core.csproj" />
     <ProjectReference Include="..\Fiap.StackOverflow.Data\Fiap.StackOverflow.Infra.Data.csproj" />
   </ItemGroup>

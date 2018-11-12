@@ -26,18 +26,21 @@ namespace Fiap.StackOverflow.Web.Models
         }
         public int Id { get; set; }
         //public UserModel Author { get; set; }
-        public string Author { get; set; }
+        public AuthorModel Author { get; set; }
 
-        [Required(ErrorMessage = "Preencher campo AuthorId")]
+        [Required(ErrorMessage = "Preencher campo AuthorId")]        
         public int AuthorId { get; set; }
 
         [Required(ErrorMessage = "Preencher campo Categoria")]
+        [Display(Name = "Categoria")]
         public int CategoryId { get; set; }
 
         [Required(ErrorMessage = "Preencher campo Title"), MaxLength(100)]
+        [Display(Name = "Título")]
         public string Title { get; set; }
 
         [Required(ErrorMessage = "Preencher campo Description"), MaxLength(256)]
+        [Display(Name = "Descrição")]
         public string Description { get; set; }
         public int Vote { get; set; }
 
@@ -48,7 +51,7 @@ namespace Fiap.StackOverflow.Web.Models
         public List<SelectListItem> Categories { get; set; }
         public List<AnswerModel> Answers { get; set; }
 
-        public int Views { get; set; }
+        public int ViewCount { get; set; }
 
         public string Category { get; set; }
     }

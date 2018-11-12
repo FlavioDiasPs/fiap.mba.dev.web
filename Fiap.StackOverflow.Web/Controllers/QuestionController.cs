@@ -56,8 +56,13 @@ namespace Fiap.StackOverflow.Web.Controllers
                                             .Take(5)
                                             .Select(x => new KeyValuePair<int, string>(x.Id, x.Title))
                                             .ToList();
-            var m = _mapper.Map<QuestionModel>(question);
-            return View(m);
+            if (User.Identity.IsAuthenticated)            
+                ViewBag.AuthorId = _authorService.GetByIdentityId(User.FindFirstValue(ClaimTypes.NameIdentifier)).Id;            
+            else            
+                ViewBag.NaoLogado = true;
+            
+
+            return View(_mapper.Map<QuestionModel>(question));
         }
         [Authorize]
         public ActionResult Create()
