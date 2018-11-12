@@ -36,14 +36,17 @@ namespace Fiap.StackOverflow.Web.Controllers
         }
         public ActionResult Index()
         {
-            var questions = _questionService.GetQuestions().Select(x => new QuestionModel()
+            var questions = _questionService.GetAllComplete().Select(x => new QuestionModel()
             {
                 Id = x.Id,
                 Title = x.Title,
                 Description = x.Description,
                 AuthorId = x.AuthorId,
-                //Author = x.Author.Name
-                //Tags = x.Tags
+                AuthorName = x.Author.Name,
+                Answers = _mapper.Map<List<AnswerModel>>(x.Answers),
+                ViewCount = x.ViewCount,
+                Category = x.Category.Name
+                
             }).ToList();
 
             var vm = new QuestionViewModel{ Questions = questions };
@@ -59,6 +62,11 @@ namespace Fiap.StackOverflow.Web.Controllers
                                             .Take(5)
                                             .Select(x => new KeyValuePair<int, string>(x.Id, x.Title))
                                             .ToList();
+            if (User.Identity.IsAuthenticated)            
+                ViewBag.AuthorId = _authorService.GetByIdentityId(User.FindFirstValue(ClaimTypes.NameIdentifier)).Id;            
+            else            
+                ViewBag.NaoLogado = true;
+            
 
             return View(_mapper.Map<QuestionModel>(question));
         }

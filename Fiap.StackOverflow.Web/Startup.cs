@@ -16,6 +16,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Fiap.StackOverflow.Web.Attributes;
+using System.Reflection;
+using Microsoft.AspNetCore.Mvc.ApplicationParts;
 
 namespace Fiap.StackOverflow.Web
 {
@@ -34,7 +36,7 @@ namespace Fiap.StackOverflow.Web
         {
             serviceCollection.AddAutoMapper();            
 
-            serviceCollection.AddDbContext<StackOverflowContext>(options => options.UseSqlServer(@"Data Source=localhost\TEW_SQLEXPRESS;Initial Catalog=FIAPOverflow;Integrated Security=SSPI;Connect Timeout=30"));
+            serviceCollection.AddDbContext<StackOverflowContext>(options => options.UseSqlServer(@"Data Source=localhost;Initial Catalog=FIAPOverflow;User Id=sa;Password=123456;Connect Timeout=30"));
 
             //serviceCollection.AddDefaultIdentity<IdentityUser>()
             //    .AddEntityFrameworkStores<StackOverflowContext>();
@@ -67,12 +69,16 @@ namespace Fiap.StackOverflow.Web
             serviceCollection.AddTransient<IAuthorRepository, AuthorRepository>();
             serviceCollection.AddTransient<IQuestionRepository, QuestionRepository>();
             serviceCollection.AddTransient<IAnswerRepository, AnswerRepository>();
-            
+
+            var apiAssembly = typeof(Fiap.StackOverflow.Api.Startup).GetTypeInfo().Assembly;
+            var part = new AssemblyPart(apiAssembly);
+
             serviceCollection.AddMvc(options =>
             {
                 //Faz com que seja desnecessário validar o model em toda ação
                 options.Filters.Add(new ModelValidationFilter()); 
-            }).SetCompatibilityVersion(CompatibilityVersion.Version_2_1); 
+            }).SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
+            .ConfigureApplicationPartManager(apm => apm.ApplicationParts.Add(part)); 
 
         }
 
@@ -93,9 +99,11 @@ namespace Fiap.StackOverflow.Web
                 {
                     routes.MapRoute(
                         name: "default",
-                        template: "{controller=Home}/{action=Index}/{id?}");
+                        template: "{controller=Question}/{action=Index}/{id?}");
                 }
            );
+
+
         }
     }
 }

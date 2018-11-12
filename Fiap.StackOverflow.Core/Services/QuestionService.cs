@@ -24,6 +24,11 @@ namespace Fiap.StackOverflow.Core.Services
             return _repository.GetAll();
         }
 
+        public IEnumerable<Question> GetAllComplete()
+        {
+            return _repository.GetAllComplete();
+        }
+
         public Question GetById(int id)
         {
             return _repository.GetById(id);
@@ -31,6 +36,7 @@ namespace Fiap.StackOverflow.Core.Services
 
         public Question GetCompleteById(int id)
         {
+        
             return _repository.GetCompleteById(id);
         }
         public IEnumerable<Question> GetQuestions()

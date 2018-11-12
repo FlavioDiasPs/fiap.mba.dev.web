@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Fiap.StackOverflow.Core.Entities;
 using Fiap.StackOverflow.Core.Interfaces.Repositories;
 using Fiap.StackOverflow.Core.Interfaces.Services;
@@ -20,6 +21,21 @@ namespace Fiap.StackOverflow.Core.Services
 
         public IEnumerable<Category> GetAll()
         {
+            var values = _repository.GetAll().ToList();
+            if (!values.Any())
+            {
+                Add(new Category()
+                {
+                    Description = ".NET Core",
+                    Name = ".NET Core"
+                });
+                Add(new Category()
+                {
+                    Description = ".NET Framework",
+                    Name = ".NET Framework"
+                });
+            }
+
             return _repository.GetAll();
         }
 

@@ -35,11 +35,11 @@ namespace Fiap.StackOverflow.Infra.Data.EntityFramework
                     .HasMaxLength(256, ConfigurationSource.Convention);
                 property.AsProperty().Builder
                     .IsUnicode(false, ConfigurationSource.Convention);
-            }
+            }            
 
             base.OnModelCreating(modelBuilder);
         }
-
+        
 
         //"Data Source=sqlserver01.mkth.hospedagemdesites.ws;Initial Catalog=mkth23;User ID=mkth23;Password=F14p#MBA*net1B"
         //public string conn = "@\"Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\Jonas\\source\\repos\\Fiap.StackOverflow.Web\\Fiap.StackOverflow.Data\\App_Data\\dbStackOverflow.mdf;Integrated Security=True;Connect Timeout=30;Database=DefaultConnection (AspnetIdentitySample); Truste";

@@ -24,5 +24,6 @@ namespace Fiap.StackOverflow.Core.Entities
         public string Description { get; set; }
         public Question Question { get; set; }
         public int QuestionId { get; set; }
+        public int Id { get; set; }
     }
 }

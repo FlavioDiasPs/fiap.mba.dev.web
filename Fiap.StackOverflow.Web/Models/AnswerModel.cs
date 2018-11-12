@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Fiap.StackOverflow.Core.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -18,10 +19,12 @@ namespace Fiap.StackOverflow.Web.Models
         {
 
         }
+
+        public AuthorModel Author { get; set; }
         public int Votes { get; set; }
         public int AuthorId { get; set; }
         public string Description { get; set; }
         public int QuestionId { get; set; }
-        public int Id { get; set; }
+        public int Id { get; set; }        
     }
 }
