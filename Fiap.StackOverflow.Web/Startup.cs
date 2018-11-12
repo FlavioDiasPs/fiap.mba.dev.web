@@ -34,7 +34,7 @@ namespace Fiap.StackOverflow.Web
         {
             serviceCollection.AddAutoMapper();            
 
-            serviceCollection.AddDbContext<StackOverflowContext>(options => options.UseSqlServer(@"Data Source=localhost\TEW_SQLEXPRESS;Initial Catalog=FIAPOverflow;Integrated Security=SSPI;Connect Timeout=30"));
+            serviceCollection.AddDbContext<StackOverflowContext>(options => options.UseSqlServer(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Jonas\source\repos\Fiap.StackOverflow.Web\Fiap.StackOverflow.Data\App_Data\dbStackOverflow.mdf;Integrated Security=True;Connect Timeout=30"));
 
             //serviceCollection.AddDefaultIdentity<IdentityUser>()
             //    .AddEntityFrameworkStores<StackOverflowContext>();
@@ -60,10 +60,8 @@ namespace Fiap.StackOverflow.Web
 
             serviceCollection.AddTransient<IQuestionService, QuestionService>();
             serviceCollection.AddTransient<IAuthorService, AuthorService>();
-            serviceCollection.AddTransient<ICategoryService, CategoryService>();
             serviceCollection.AddTransient<IAnswerService, AnswerService>();
 
-            serviceCollection.AddTransient<ICategoryRepository, CategoryRepository>();
             serviceCollection.AddTransient<IAuthorRepository, AuthorRepository>();
             serviceCollection.AddTransient<IQuestionRepository, QuestionRepository>();
             serviceCollection.AddTransient<IAnswerRepository, AnswerRepository>();
@@ -81,11 +79,10 @@ namespace Fiap.StackOverflow.Web
             ConnectionString = Configuration["ConnectionStrings:DefaultConnection"];
 
             if (hostingEnvironment.IsDevelopment())
-                app.UseDeveloperExceptionPage();
-
-
-            app.UseHttpsRedirection();
-            app.UseStaticFiles();
+                applicationBuilder.UseDeveloperExceptionPage();
+            
+            applicationBuilder.UseHttpsRedirection();
+            applicationBuilder.UseStaticFiles();
 
             app.UseAuthentication();
 
