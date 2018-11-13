@@ -36,6 +36,7 @@ namespace Fiap.StackOverflow.Web
         {
             serviceCollection.AddAutoMapper();            
 
+            //serviceCollection.AddDbContext<StackOverflowContext>(options => options.UseSqlServer(@"Data Source=sqlserver01.mkth.hospedagemdesites.ws;Initial Catalog=mkth23;User ID=mkth23;Password=F14p#MBA*net1B"));
             serviceCollection.AddDbContext<StackOverflowContext>(options => options.UseSqlServer(ConnectionString));
 
             //serviceCollection.AddDefaultIdentity<IdentityUser>()

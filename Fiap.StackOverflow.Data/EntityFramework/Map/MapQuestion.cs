@@ -21,7 +21,7 @@ namespace Fiap.StackOverflow.Infra.Data.EntityFramework.Map
                 .IsRequired();
 
             builder.Property(x => x.Description)
-                .HasMaxLength(256)
+                .HasMaxLength(2048)
                 .IsRequired();
 
             builder.HasKey(x => x.Id);

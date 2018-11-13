@@ -22,11 +22,11 @@ namespace Fiap.StackOverflow.Web.Models
         [Display(Name = "Categoria")]
         public int CategoryId { get; set; }
 
-        [Required(ErrorMessage = "Preencher campo Title"), MaxLength(100)]
+        [Required(ErrorMessage = "Preencher campo Title"), MaxLength(128)]
         [Display(Name = "Título")]
         public string Title { get; set; }
 
-        [Required(ErrorMessage = "Preencher campo Description"), MaxLength(256)]
+        [Required(ErrorMessage = "Preencher campo Description"), MaxLength(2048)]
         [Display(Name = "Descrição")]
         public string Description { get; set; }
         public int Vote { get; set; }

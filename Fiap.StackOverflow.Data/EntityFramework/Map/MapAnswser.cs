@@ -18,6 +18,9 @@ namespace Fiap.StackOverflow.Infra.Data.EntityFramework.Map
             //builder.Property(x => x.Nome).HasMaxLength(50).IsRequired();
             //builder.Property(x => x.UrlLogo).HasMaxLength(255).IsRequired();
 
+            builder.Property(x => x.Description)
+                .HasMaxLength(2048)
+                .IsRequired();
 
         }
     }
