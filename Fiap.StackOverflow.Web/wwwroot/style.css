@@ -187,8 +187,16 @@ border-bottom:1px solid #e5e5e5; }
 #content .question_list p { float:left; max-width:86%; width: 100%; font-size:14px; border-bottom:none; }
 #content .question_list p span { float:left; margin-right:20px; }
 
-#content .answers_total { float:left; width:65px; height:65px; font-size:14px; text-align:center; 
-line-height:normal; color:#fff; margin-right:25px; }
+#content .answers_total {
+    float: left;
+    width: 75px;
+    height: 65px;
+    font-size: 14px;
+    text-align: center;
+    line-height: normal;
+    color: #fff;
+    margin-right: 25px;
+}
 #content .answers_total a { display:block; text-align:center; font-size:25px; font-weight:bold; padding-top:8px; color:#fff; }
 #content .answers_total a:hover {}
 

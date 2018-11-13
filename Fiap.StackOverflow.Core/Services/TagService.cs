@@ -26,7 +26,6 @@ namespace Fiap.StackOverflow.Core.Services
         {
             return _repository.GetById(id);
         }
-
         public void Remove(Tag obj)
         {
             _repository.Remove(obj);

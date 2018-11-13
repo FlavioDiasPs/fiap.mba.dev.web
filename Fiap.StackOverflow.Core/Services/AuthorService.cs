@@ -43,12 +43,13 @@ namespace Fiap.StackOverflow.Core.Services
 
         public void Remove(Author obj)
         {
-            throw new NotImplementedException();
+            _repository.Remove(obj);
         }
 
         public void Update(Author obj)
         {
-            throw new NotImplementedException();
+            _repository.Update(obj);
         }
+
     }
 }

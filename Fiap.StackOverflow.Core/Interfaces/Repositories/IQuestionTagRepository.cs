@@ -8,5 +8,6 @@ namespace Fiap.StackOverflow.Core.Interfaces.Repositories
     public interface IQuestionTagRepository : IRepositoryBase<QuestionTag>
     {
         IQueryable<QuestionTag> GetQuestionsTagByTagId(int id);
+        IQueryable<QuestionTag> GetTagCloud();
     }
 }

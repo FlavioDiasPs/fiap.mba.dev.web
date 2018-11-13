@@ -2,6 +2,7 @@
 using Fiap.StackOverflow.Core.Interfaces.Repositories;
 using Fiap.StackOverflow.Infra.Data.EntityFramework;
 using Fiap.StackOverflow.Infra.Data.Repositories.Base;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
 
@@ -23,7 +24,9 @@ namespace Fiap.StackOverflow.Infra.Data.Repositories
 
         public Author GetCompleteById(int id)
         {
-            return _context.Authors.FirstOrDefault(x => x.Id == id);
+            return _context.Authors
+                .Include(x => x.Questions)
+                .FirstOrDefault(x => x.Id == id);
         }
     }
 }

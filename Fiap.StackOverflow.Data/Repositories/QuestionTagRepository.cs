@@ -23,5 +23,10 @@ namespace Fiap.StackOverflow.Infra.Data.Repositories
                 .Include("Question.Author")
                 .Where(x => x.TagId == id);
         }
+
+        public IQueryable<QuestionTag> GetTagCloud()
+        {
+            return _context.QuestionsTag;
+        }
     }
 }

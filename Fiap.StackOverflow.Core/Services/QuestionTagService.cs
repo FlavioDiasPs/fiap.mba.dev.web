@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Fiap.StackOverflow.Core.Entities;
 using Fiap.StackOverflow.Core.Interfaces.Repositories;
 using Fiap.StackOverflow.Core.Interfaces.Services;
@@ -30,6 +31,19 @@ namespace Fiap.StackOverflow.Core.Services
         public IEnumerable<QuestionTag> GetQuestionsTagByTagId(int id)
         {
             return _repository.GetQuestionsTagByTagId(id);
+        }
+
+        public Dictionary<Tag,int> GetTagCloud(int quantity)
+        {
+            return _repository.GetTagCloud()
+                        .GroupBy(info => info.Tag)
+                        .Select(group => new {
+                            Tag = group.Key,
+                            Count = group.Count()
+                        })
+                        .OrderByDescending(x => x.Count)
+                        .Take(quantity)
+                        .ToDictionary(x => x.Tag, x=>x.Count);
         }
 
         public void Remove(QuestionTag obj)

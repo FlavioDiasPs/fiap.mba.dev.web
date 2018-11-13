@@ -45,6 +45,11 @@ namespace Fiap.StackOverflow.Core.Services
             throw new System.NotImplementedException();
         }
 
+        public Category GetCompletedById(int id)
+        {
+            return _repository.GetCompletedById(id);
+        }
+
         public void Remove(Category obj)
         {
             _repository.Remove(obj);

@@ -7,5 +7,6 @@ namespace Fiap.StackOverflow.Core.Interfaces.Services
     public interface IQuestionTagService : IServiceBase<QuestionTag>
     {
         IEnumerable<QuestionTag> GetQuestionsTagByTagId(int id);
+        Dictionary<Tag, int> GetTagCloud(int quantity);
     }
 }

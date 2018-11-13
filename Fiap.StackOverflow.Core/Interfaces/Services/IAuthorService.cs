@@ -7,5 +7,6 @@ namespace Fiap.StackOverflow.Core.Interfaces.Services
     public interface IAuthorService : IServiceBase<Author>
     {
         Author GetByIdentityId(string id);
+        Author GetCompleteById(int id);
     }
 }

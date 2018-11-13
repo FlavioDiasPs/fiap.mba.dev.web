@@ -1,4 +1,5 @@
-﻿using Fiap.StackOverflow.Core.Entities;
+﻿using System.Linq;
+using Fiap.StackOverflow.Core.Entities;
 using Fiap.StackOverflow.Core.Interfaces.Repositories;
 using Fiap.StackOverflow.Infra.Data.EntityFramework;
 using Fiap.StackOverflow.Infra.Data.Repositories.Base;
@@ -13,6 +14,5 @@ namespace Fiap.StackOverflow.Infra.Data.Repositories
         {
             _context = context;
         }
-
     }
 }

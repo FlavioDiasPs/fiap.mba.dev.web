@@ -57,6 +57,26 @@ namespace Fiap.StackOverflow.Web.Controllers
 
             return View(vm);
         }
+        public ActionResult QuestionsByCategory(int id)
+        {
+            var category = _categoryService.GetCompletedById(id);
+            var questions = category.Questions.Select(x => _mapper.Map<QuestionModel>(x)).ToList();
+
+            var vm = new QuestionViewModel { Questions = questions };
+            vm.Category = category.Name;
+
+            return View(vm);
+        }
+        public ActionResult QuestionsByAuthor(int id)
+        {
+            var author = _authorService.GetCompleteById(id);
+            var questions = author.Questions.Select(x => _mapper.Map<QuestionModel>(x)).ToList();
+
+            var vm = new QuestionViewModel { Questions = questions };
+            vm.Author = author.Name;
+
+            return View(vm);
+        }
         public ActionResult Details(int id)
         {
             var question = _questionService.GetCompleteById(id);
