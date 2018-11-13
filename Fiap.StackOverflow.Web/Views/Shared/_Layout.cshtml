@@ -18,26 +18,29 @@
     <link href="~/lib/tagify/dist/tagify.css" rel="stylesheet" />
 </head>
 <body class="archive category category-questions category-5">
-    <div id="top_strip">
-        <div id="top_strip_in" class="clearfix">
-            <div id="topmenu" class="menu">
-                <div id="menu-button">Menu</div><div class="menu-top-nav-container">
-                    <ul id="menu-top-nav" class="menu">
-                        @*<li id="menu-item-153" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-153"><a target="_blank" href="https://templatic.com/cms-themes/answers-wordpress-theme">Theme Features</a></li>
-                            <li id="menu-item-152" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-152"><a href="https://demo.templatic.com/answers/site-map/">Site Map</a></li>
-                            <li id="menu-item-151" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-151"><a href="https://demo.templatic.com/answers/archive-page/">Archive Page</a></li>*@
-                    </ul>
-                </div>
-            </div>				<p>
 
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                @*<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">DoggyOverThrone</a>*@
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    @*<li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>*@
+                    <li><a asp-area="" asp-controller="Question" asp-action="Index">Questions</a></li>
+                    <li>
+                </ul>
                 <partial name="_LoginPartial" />
-
-
-
-            </p>
+            </div>
         </div>
-    </div>
-    <div id="header">
+    </nav>
+    <div id="header" style="margin-top:50px;">
         <div id="header_in" class="clearfix">
 
 
