@@ -1,21 +1,12 @@
 ﻿@model Dictionary<TagModel, int>
-@*<ul>
-    @foreach (var item in Model)
-    {
-        <li>@item.Key.Value , @item.Value</li>
-    }
-</ul>*@
 
 <link href="~/lib/jqcloud/jqcloud.css" rel="stylesheet" />
-@*<script src="~/lib/jqcloud/jqcloud-1.0.4.min.js"></script>*@
-<script src="~/lib/jqcloud/jqcloud-1.0.4.js"></script>
+<script src="~/lib/jqcloud/jqcloud-1.0.4.min.js"></script>
 <script type="text/javascript">
-    
-
-    $(document).ready(function () {
+    $(document).ready( function () {
 
         var word_list = [
-        
+
             @foreach (var item in Model)
             {
                 @Html.Raw("{ text: '" + @item.Key.Value + "', weight: " + @item.Value + ", link: '" + @Url.Action("QuestionsByTag", "Question", new { id = @item.Key.Id }) + "' },");

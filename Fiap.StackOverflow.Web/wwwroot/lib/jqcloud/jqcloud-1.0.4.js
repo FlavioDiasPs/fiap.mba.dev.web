@@ -229,4 +229,4 @@
     setTimeout(function(){drawWordCloud();}, 10);
     return $this;
   };
-});
+})(jQuery);

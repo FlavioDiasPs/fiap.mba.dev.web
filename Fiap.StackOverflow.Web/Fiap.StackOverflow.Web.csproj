@@ -5,6 +5,7 @@
     <TargetFramework>netcoreapp2.1</TargetFramework>
     <RazorCompileToolset>PrecompilationTool</RazorCompileToolset>
     <StartupObject>Fiap.StackOverflow.Web.Program</StartupObject>
+    <UserSecretsId>5bd6ef0b-e124-4a10-975c-55a95d451c2b</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>

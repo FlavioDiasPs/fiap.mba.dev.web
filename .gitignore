@@ -261,3 +261,4 @@ __pycache__/
 *.pyc
 /Fiap.StackOverflow.Domain
 /Fiap.StackOverflow.Application
+/Fiap.StackOverflow.Web/Properties/PublishProfiles
