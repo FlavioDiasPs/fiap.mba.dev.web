@@ -33,7 +33,8 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     @*<li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>*@
-                    <li><a asp-area="" asp-controller="Question" asp-action="Index">Questions</a></li>
+                    <li><a asp-area="" asp-controller="Question" asp-action="Index">Home</a></li>
+                    <li><a asp-area="" asp-controller="Question" asp-action="Create">Perguntar</a></li>
                     <li>
                 </ul>
                 <partial name="_LoginPartial" />
@@ -70,7 +71,7 @@
 
                 <div id="sidebar">
 
-                    <a href="@Url.Action("Create", "Question")" class="b_askquestions">Faça uma Pergunta</a>
+                    <a href="@Url.Action("Create", "Question")" class="b_askquestions">Perguntar</a>
 
                     <div class="widget">
                         <div>
