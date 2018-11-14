@@ -4,10 +4,11 @@ using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
+using System.Data.SqlClient;
 
 namespace Fiap.StackOverflow.Infra.Data.Repositories.Base
 {
-    public class RepositoryBase<TEntity>: IRepositoryBase<TEntity> where TEntity : class
+    public class RepositoryBase<TEntity> : IRepositoryBase<TEntity> where TEntity : class
     {
 
         private readonly StackOverflowContext _context;
@@ -46,5 +47,10 @@ namespace Fiap.StackOverflow.Infra.Data.Repositories.Base
             _context.Entry(obj).State = EntityState.Modified;
             _context.SaveChanges();
         }
+        public IQueryable<TEntity> FromSql(object obj, string sql, SqlParameter[] parameters)
+        {
+            return _context.Set<TEntity>().FromSql(sql, parameters).AsQueryable();
+        }
+
     }
 }

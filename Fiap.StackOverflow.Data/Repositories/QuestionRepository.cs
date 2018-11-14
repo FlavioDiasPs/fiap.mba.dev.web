@@ -4,6 +4,7 @@ using Fiap.StackOverflow.Infra.Data.EntityFramework;
 using Fiap.StackOverflow.Infra.Data.Repositories.Base;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Fiap.StackOverflow.Infra.Data.Repositories
 {
@@ -28,6 +29,7 @@ namespace Fiap.StackOverflow.Infra.Data.Repositories
                 .Include("Answers.Author")
                 .Include(x => x.QuestionTags)
                 .Include("QuestionTags.Tag")
+                .AsNoTracking()
                 .FirstOrDefault(x => x.Id == id);
         }
 
@@ -37,6 +39,7 @@ namespace Fiap.StackOverflow.Infra.Data.Repositories
                 .Include(x => x.Author)
                 .Include(x => x.Answers)
                 .Include(x => x.Category)
+                .AsNoTracking()
                 .Include("Answers.Author");
         }
 
@@ -48,6 +51,7 @@ namespace Fiap.StackOverflow.Infra.Data.Repositories
                 .Include(x => x.Answers)
                 .Include("Answers.Author")
                 .Include(x => x.QuestionTags)
+                .AsNoTracking()
                 .Include("QuestionTags.Tag");
         }
         public IQueryable<Question> GetLastQuestions(int quantity)
@@ -60,7 +64,8 @@ namespace Fiap.StackOverflow.Infra.Data.Repositories
                 .Include("Answers.Author")
                 .Include(x => x.QuestionTags)
                 .Include("QuestionTags.Tag")
-                .OrderByDescending(x => x.Id);
+                .OrderByDescending(x => x.Id)
+                .AsNoTracking();
         }
         public IQueryable<Question> GetQuestionsByTagId(int tagId)
         {
@@ -71,6 +76,7 @@ namespace Fiap.StackOverflow.Infra.Data.Repositories
                 .Include("Question.Category")
                 .Include("Question.Answers")
                 .Include("Question.Answers.Author")
+                .AsNoTracking()
                 .OrderByDescending(q => q.Id);
         }
     }

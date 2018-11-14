@@ -1,4 +1,4 @@
-﻿@model Dictionary<TagModel, int>
+﻿@model IList<Tuple<string, int, int>>
 
 <link href="~/lib/jqcloud/jqcloud.css" rel="stylesheet" />
 <script src="~/lib/jqcloud/jqcloud-1.0.4.min.js"></script>
@@ -9,7 +9,7 @@
 
             @foreach (var item in Model)
             {
-                @Html.Raw("{ text: '" + @item.Key.Value + "', weight: " + @item.Value + ", link: '" + @Url.Action("QuestionsByTag", "Question", new { id = @item.Key.Id }) + "' },");
+                @Html.Raw("{ text: '" + @item.Item1 + "', weight: " + @item.Item2 + ", link: '" + @Url.Action("QuestionsByTag", "Question", new { id = @item.Item3 }) + "' },");
             }
 
         ];

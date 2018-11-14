@@ -9,18 +9,19 @@ namespace Fiap.StackOverflow.Web.ViewComponents
 {
     public class TagCloudViewComponent : ViewComponent
     {
-        private readonly IQuestionTagService _questionTagService;
+        private readonly ITagCloudService _tagCloudService;
+        private readonly ITagService _tagService;
         private readonly IMapper _mapper;
-        public TagCloudViewComponent(IMapper mapper, IQuestionTagService questionTagService)
+        public TagCloudViewComponent(IMapper mapper, ITagCloudService tagCloudService, ITagService tagService)
         {
             _mapper = mapper;
-            _questionTagService = questionTagService;
+            _tagCloudService = tagCloudService;
+            _tagService = tagService;
         }
 
         public async Task<IViewComponentResult> InvokeAsync(int quantity)
         {
-            var tags = _questionTagService.GetTagCloud(quantity).ToDictionary(x => _mapper.Map<TagModel>(x.Key), x => x.Value);
-
+            var tags = _tagCloudService.GetTagCloud(quantity);
             return View("TagCloud", tags);
         }
     }

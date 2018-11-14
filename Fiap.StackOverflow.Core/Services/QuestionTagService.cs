@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using Fiap.StackOverflow.Core.Entities;
 using Fiap.StackOverflow.Core.Interfaces.Repositories;
@@ -33,18 +34,33 @@ namespace Fiap.StackOverflow.Core.Services
             return _repository.GetQuestionsTagByTagId(id);
         }
 
-        public Dictionary<Tag,int> GetTagCloud(int quantity)
-        {
-            return _repository.GetTagCloud()
-                        .GroupBy(info => info.Tag)
-                        .Select(group => new {
-                            Tag = group.Key,
-                            Count = group.Count()
-                        })
-                        .OrderByDescending(x => x.Count)
-                        .Take(quantity)
-                        .ToDictionary(x => x.Tag, x=>x.Count);
-        }
+        //public Dictionary<Tag, int> GetTagCloud(int quantity)
+        //{
+        //    var parameters = new SqlParameter[] { new SqlParameter("@Quantity", quantity.ToString())};
+        //    var tags1 = _repository.FromSql(new TagCloud() , @"SELECT TOP (CONVERT(INT,@Quantity)) Id, QuestionId, TagId
+        //                                           ,COUNT(0) Count  FROM[dbo].[QuestionTag]  GROUP BY Id, QuestionId, TagId  ORDER BY COUNT(0) DESC", parameters);
+
+        //    var tags = _repository.GetTagCloud();
+        //    //.GroupBy(info => info.Tag)
+        //    //.Select(group => new {
+        //    //    Tag = group.Key,
+        //    //    Count = group.Count()
+        //    //})
+        //    //.OrderByDescending(x => x.Count)
+        //    //.Take(quantity)
+        //    //.ToDictionary(x => x.Tag, x=>x.Count);
+
+        //    var tagg = tags.Select(c => new
+        //    {
+        //        c.Tag
+        //    }).GroupBy(c => c.Tag, (k, g) => new
+        //    {
+        //        Tag = k,
+        //        Count = g.Count()
+        //    }).OrderByDescending(x => x.Count).Take(quantity);
+
+        //    return tagg.ToDictionary(x => x.Tag, x => x.Count);
+        //}
 
         public void Remove(QuestionTag obj)
         {

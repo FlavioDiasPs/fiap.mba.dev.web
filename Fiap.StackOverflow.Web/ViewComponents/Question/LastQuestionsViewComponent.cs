@@ -17,7 +17,7 @@ namespace Fiap.StackOverflow.Web.ViewComponents
             _questionService = questionService;
         }
 
-        public async Task<IViewComponentResult> InvokeAsync(int quantity)
+        public async  Task<IViewComponentResult> InvokeAsync(int quantity)
         {
             var perguntas = _questionService.GetLastQuestions(quantity).Select(x => _mapper.Map<QuestionModel>(x));
 

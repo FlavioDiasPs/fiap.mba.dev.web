@@ -64,12 +64,14 @@ namespace Fiap.StackOverflow.Web
             serviceCollection.AddTransient<IQuestionService, QuestionService>();
             serviceCollection.AddTransient<ICategoryService, CategoryService>();
             serviceCollection.AddTransient<ITagService, TagService>();
+            serviceCollection.AddTransient<ITagCloudService, TagCloudService>();
             serviceCollection.AddTransient<IQuestionTagService, QuestionTagService>();
             serviceCollection.AddTransient<IAuthorService, AuthorService>();
             serviceCollection.AddTransient<IAnswerService, AnswerService>();
 
             serviceCollection.AddTransient<IQuestionRepository, QuestionRepository>();
             serviceCollection.AddTransient<ICategoryRepository, CategoryRepository>();
+            serviceCollection.AddTransient<ITagCloudRepository, TagCloudRepository>();
             serviceCollection.AddTransient<ITagRepository, TagRepository>();
             serviceCollection.AddTransient<IQuestionTagRepository, QuestionTagRepository>();
             serviceCollection.AddTransient<IAuthorRepository, AuthorRepository>();

@@ -21,6 +21,7 @@ namespace Fiap.StackOverflow.Infra.Data.EntityFramework
         public DbSet<Category> Categories { get; set; }
         public DbSet<QuestionTag> QuestionsTag { get; set; }
         public DbSet<Tag> Tags { get; set; }
+        public DbSet<TagCloud> TagClouds { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
